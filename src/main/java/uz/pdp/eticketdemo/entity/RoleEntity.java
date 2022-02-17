@@ -1,12 +1,15 @@
 package uz.pdp.eticketdemo.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import uz.pdp.eticketdemo.enums.RoleType;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 public class RoleEntity {
@@ -25,5 +28,4 @@ public class RoleEntity {
         return roleType.name();
     }
 
-    // TODO: 2/17/2022 This class should be optimized add connection like monytoone
 }

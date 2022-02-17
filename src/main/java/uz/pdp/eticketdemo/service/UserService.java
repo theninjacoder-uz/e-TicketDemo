@@ -11,6 +11,7 @@ import uz.pdp.eticketdemo.repository.UserRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,17 +21,31 @@ public class UserService extends BaseResponse implements BaseService<UserDto> {
 
     @Override
     public ApiResponse getList() {
-        return null;
+        List<UserEntity> allUsers = userRepository.findAll();
+        SUCCESS.setData(allUsers);
+        return SUCCESS;
     }
 
     @Override
-    public ApiResponse getById(Long id) {
-        return null;
+    public ApiResponse getById(@PathVariable Long id) {
+        Optional<UserEntity> getUserById = userRepository.findById(id);
+        if(getUserById.isPresent()) {
+            SUCCESS.setData(getUserById);
+            return SUCCESS;
+        }
+        return NOT_FOUND;
     }
 
     @Override
-    public ApiResponse delete(Long id) {
-        return null;
+    public ApiResponse delete(@PathVariable Long id) {
+        Optional<UserEntity> findUserById = userRepository.findById(id);
+        if(findUserById.isPresent()){
+            UserEntity userEntity = findUserById.get();
+            userEntity.setUserStatus(false);
+            userRepository.save(userEntity);
+            return SUCCESS;
+        }
+        return FAILED;
     }
 
     @Override
@@ -48,11 +63,10 @@ public class UserService extends BaseResponse implements BaseService<UserDto> {
     }
 
     @Override
-    public ApiResponse add(UserDto item) {
-        UserEntity user = new UserEntity();
-        user.setPassword(item.getPassword());
-        user.setPhoneNumber(item.getPhoneNumber());
-        userRepository.save(user);
+    public ApiResponse add(@RequestBody UserDto userDto) {
+        userRepository.save(userDto);
         return null;
     }
+
+    // TODO: 2/17/2022 Check user before adding him  
 }
