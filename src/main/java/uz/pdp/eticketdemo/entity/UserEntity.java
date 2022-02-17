@@ -5,8 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 @ToString
 @RequiredArgsConstructor
 @NoArgsConstructor
@@ -20,11 +19,13 @@ public class UserEntity {
     @Column(unique = true)
     private String phoneNumber;
 
+    @Column(unique = true)
+    private String email;
+
     @Column(nullable = false)
     private String password;
 
-    @Column()
-    @GeneratedValue()
+    @Column(nullable = false)
     private Date createdDate;
 
 }
