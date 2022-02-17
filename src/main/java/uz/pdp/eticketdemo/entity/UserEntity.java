@@ -5,10 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@Getter
-@Setter
-@Entity
-@Table(name = "users")
+@Data
+@ToString
+@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,11 +19,13 @@ public class UserEntity {
     @Column(unique = true)
     private String phoneNumber;
 
+    @Column(unique = true)
+    private String email;
+
     @Column(nullable = false)
     private String password;
 
-    @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdDate = new Date();
+    @Column(nullable = false)
+    private Date createdDate;
 
 }
