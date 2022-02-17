@@ -9,20 +9,25 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "seat_status")
-public class SeatStatusEntity {
+@Table(name = "train")
+public class TrainEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(columnDefinition = "integer default -1")
-    private Integer fromStationOrder;
+    private String name;
+    private String model;
 
-    @Column(columnDefinition = "integer default -1")
-    private Integer toStationOrder;
+    @ManyToOne
+    private DirectionEntity direction;
+
+    private Integer capacity;
+
+    private Integer availableSeatNumber;
+
+    private double averageSpeed;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date createdDate = new Date();
-
 }
