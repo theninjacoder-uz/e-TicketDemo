@@ -1,5 +1,7 @@
 package uz.pdp.eticketdemo.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.dto.SeatTypeDto;
 import uz.pdp.eticketdemo.entity.SeatTypeEntity;
@@ -7,34 +9,69 @@ import uz.pdp.eticketdemo.repository.SeatTypeRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
+@RequiredArgsConstructor
 public class SeatTypeService extends BaseResponse implements BaseService<SeatTypeDto>{
 
     private final SeatTypeRepository seatTypeRepository;
 
     //Constructor injection
-    public SeatTypeService(SeatTypeRepository seatTypeRepository) {
-        this.seatTypeRepository = seatTypeRepository;
-    }
+//    @Autowired
+//    public SeatTypeService(SeatTypeRepository seatTypeRepository) {
+//        this.seatTypeRepository = seatTypeRepository;
+//    }
 
+    //get all seats
     @Override
     public ApiResponse getList() {
-        return null;
+        List<SeatTypeEntity> list = seatTypeRepository.findAll();
+        SUCCESS.setData(list);
+        return SUCCESS;
     }
 
+    //find by id
     @Override
     public ApiResponse getById(Long id) {
-        return null;
+
+        Optional<SeatTypeEntity> optional = seatTypeRepository.findById(id);
+
+        if(optional.isPresent()){
+            SUCCESS.setData(optional.get());
+            return SUCCESS;
+        }
+
+        return NOT_FOUND;
     }
 
+    //delete
     @Override
     public ApiResponse delete(Long id) {
-        return null;
+
+        boolean exists = seatTypeRepository.existsById(id);
+        if(exists) {
+            seatTypeRepository.deleteById(id);
+            return SUCCESS;
+        }
+        return NOT_FOUND;
     }
 
+    //update
     @Override
     public ApiResponse edit(Long id, SeatTypeDto item) {
-        return null;
+        Optional<SeatTypeEntity> optional = seatTypeRepository.findById(id);
+        if(optional.isPresent()){
+            SeatTypeEntity seatType = optional.get();
+            seatType.setDescription(item.getDescription());
+            seatType.setName(item.getName());
+            seatTypeRepository.save(seatType);
+            SUCCESS.setData(seatType);
+
+            return SUCCESS;
+        }
+        return NOT_FOUND;
     }
 
     //add seat type to DB

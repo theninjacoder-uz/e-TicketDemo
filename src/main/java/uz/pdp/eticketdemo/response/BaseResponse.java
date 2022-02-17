@@ -6,4 +6,5 @@ public abstract class BaseResponse {
 
     protected static final ApiResponse NOT_FOUND
             = new ApiResponse("not found", 0);
+
 }
