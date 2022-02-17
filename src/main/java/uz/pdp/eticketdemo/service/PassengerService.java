@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.dto.PassengerDto;
 import uz.pdp.eticketdemo.entity.PassengerEntity;
-import uz.pdp.eticketdemo.entity.SeatTypeEntity;
 import uz.pdp.eticketdemo.repository.PassengerRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
@@ -58,6 +57,7 @@ public class PassengerService extends BaseResponse implements BaseService<Passen
             passenger.setLastName(item.getLastName());
             passenger.setGender(item.getGender());
             passenger.setBirthDate(item.getBirthDate());
+            passenger.setDocType(item.getDocType());
             passenger.setPassportNumber(item.getPassportNumber());
             passenger.setPassportExpirationDate(item.getPassportExpirationDate());
             passenger.setCitizenship(item.getCitizenship());
@@ -79,6 +79,7 @@ public class PassengerService extends BaseResponse implements BaseService<Passen
         passenger.setLastName(item.getLastName());
         passenger.setGender(item.getGender());
         passenger.setBirthDate(item.getBirthDate());
+        passenger.setDocType(item.getDocType());
         passenger.setPassportNumber(item.getPassportNumber());
         passenger.setPassportExpirationDate(item.getPassportExpirationDate());
         passenger.setCitizenship(item.getCitizenship());

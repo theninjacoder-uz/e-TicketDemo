@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.dto;
 
 import lombok.Data;
+import uz.pdp.eticketdemo.entity.DocTypeEntity;
 import uz.pdp.eticketdemo.entity.UserEntity;
 
 import java.util.Date;
@@ -14,8 +15,9 @@ public class PassengerDto {
     private String lastName;
     private String gender;
     private Date birthDate;
+    private DocTypeEntity docType;
     private String passportNumber;
     private Date passportExpirationDate;
-    private Country citizenship;
+    private CountryEntity citizenship;
 
 }
