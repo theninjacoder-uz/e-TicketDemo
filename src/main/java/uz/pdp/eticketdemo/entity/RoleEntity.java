@@ -1,12 +1,10 @@
 package uz.pdp.eticketdemo.entity;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import uz.pdp.eticketdemo.enums.RoleType;
 
 import javax.persistence.*;
-import java.io.Serializable;
-
-
 
 @Data
 @Entity

@@ -2,9 +2,9 @@ package uz.pdp.eticketdemo.dto;
 
 
 import lombok.Data;
+import uz.pdp.eticketdemo.entity.UserEntity;
 
 @Data
-public class UserDto {
-    private String phoneNumber;
-    private String password;
+public class UserDto extends UserEntity {
+
 }
