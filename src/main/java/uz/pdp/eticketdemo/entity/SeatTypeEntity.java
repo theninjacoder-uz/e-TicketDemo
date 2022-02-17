@@ -1,7 +1,6 @@
 package uz.pdp.eticketdemo.entity;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,15 +8,15 @@ import java.util.Date;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
 @Entity
+@Table(name = "seat_type")
 public class SeatTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true, columnDefinition = "default 'simple'")
-    private String name;
+    @Column(unique = true)
+    private String name = "simple";
     private String description;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
