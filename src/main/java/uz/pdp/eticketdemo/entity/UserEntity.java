@@ -1,9 +1,11 @@
 package uz.pdp.eticketdemo.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @ToString
@@ -16,6 +18,9 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column
+    private String chat_id;
+
     @Column(unique = true)
     private String phoneNumber;
 
@@ -25,7 +30,14 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private Date createdDate;
+    @Column(columnDefinition = "boolean default true")
+    private Boolean userStatus;
 
+    @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date created_date;
+
+    @Column(name = "user_role_id")
+    @ManyToMany
+    private List<RoleEntity> roleEntityList;
 }
