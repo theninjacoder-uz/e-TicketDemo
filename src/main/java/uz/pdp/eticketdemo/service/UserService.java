@@ -7,10 +7,12 @@ import uz.pdp.eticketdemo.dto.UserDto;
 import uz.pdp.eticketdemo.entity.UserEntity;
 import uz.pdp.eticketdemo.repository.UserRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
+import uz.pdp.eticketdemo.response.BaseResponse;
+
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements BaseService<UserDto>{
+public class UserService extends BaseResponse implements BaseService<UserDto>{
     private final UserRepository userRepository;
 
     @Override
@@ -39,6 +41,6 @@ public class UserService implements BaseService<UserDto>{
         user.setPassword(item.getPassword());
         user.setPhoneNumber(item.getPhoneNumber());
         userRepository.save(user);
-        return null;
+        return SUCCESS;
     }
 }

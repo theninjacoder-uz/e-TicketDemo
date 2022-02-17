@@ -1,27 +1,24 @@
 package uz.pdp.eticketdemo.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "users")
-public class UserEntity {
+public class SeatTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
-    private String phoneNumber;
-
-    @Column(nullable = false)
-    private String password;
+    @Column(unique = true, columnDefinition = "default 'simple'")
+    private String name;
+    private String description;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
