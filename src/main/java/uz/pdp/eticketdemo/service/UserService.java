@@ -4,7 +4,7 @@ package uz.pdp.eticketdemo.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.dto.UserDto;
-import uz.pdp.eticketdemo.entity.UserEntity;
+import uz.pdp.eticketdemo.entity.user.UserEntity;
 import uz.pdp.eticketdemo.repository.UserRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;

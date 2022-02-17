@@ -1,6 +1,7 @@
-package uz.pdp.eticketdemo.entity;
+package uz.pdp.eticketdemo.entity.direction;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,20 +9,16 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
-public class UserEntity {
+@Table(name = "direction")
+public class DirectionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
-    private String phoneNumber;
-
-    @Column(nullable = false)
-    private String password;
+    @Column
+    private String name;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date createdDate = new Date();
-
 }

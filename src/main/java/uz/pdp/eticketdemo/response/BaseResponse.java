@@ -1,6 +1,10 @@
 package uz.pdp.eticketdemo.response;
 
-public abstract class BaseResponse {
+import org.springframework.http.HttpEntity;
+
+import java.net.http.HttpResponse;
+
+public abstract class BaseResponse{
     protected static final ApiResponse SUCCESS
             = new ApiResponse("success", 1);
 
