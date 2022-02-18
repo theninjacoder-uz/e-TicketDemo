@@ -1,10 +1,12 @@
-package uz.pdp.eticketdemo.model.entity;
+package uz.pdp.eticketdemo.model.entity.user;
 
 import lombok.*;
+import uz.pdp.eticketdemo.model.entity.address.CountryEntity;
+import uz.pdp.eticketdemo.model.entity.user.DocTypeEntity;
+import uz.pdp.eticketdemo.model.entity.user.UserEntity;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter

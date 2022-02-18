@@ -2,7 +2,7 @@ package uz.pdp.eticketdemo.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.OrderStatusDto;
-import uz.pdp.eticketdemo.model.entity.OrderStatusEntity;
+import uz.pdp.eticketdemo.model.entity.user.OrderStatusEntity;
 import uz.pdp.eticketdemo.repository.OrderStatusRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
@@ -10,9 +10,11 @@ import uz.pdp.eticketdemo.response.BaseResponse;
 import java.util.List;
 import java.util.Optional;
 
+import static uz.pdp.eticketdemo.response.BaseResponse.*;
+
 @Service
 @RequiredArgsConstructor
-public class OrderStatusService extends BaseResponse implements BaseService<OrderStatusDto> {
+public class OrderStatusService implements BaseService<OrderStatusDto> {
     private final OrderStatusRepository orderStatusRepository;
 
     @Override

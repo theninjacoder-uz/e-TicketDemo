@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.model.entity;
+package uz.pdp.eticketdemo.model.entity.user;
 
 import lombok.*;
 

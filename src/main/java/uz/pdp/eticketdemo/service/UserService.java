@@ -6,17 +6,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import uz.pdp.eticketdemo.model.dto.UserDto;
-import uz.pdp.eticketdemo.model.entity.UserEntity;
+import uz.pdp.eticketdemo.model.entity.user.UserEntity;
 import uz.pdp.eticketdemo.repository.UserRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
-import uz.pdp.eticketdemo.response.BaseResponse;
+
+import static uz.pdp.eticketdemo.response.BaseResponse.*;
+
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService extends BaseResponse implements BaseService<UserDto> {
+public class UserService implements BaseService<UserDto> {
     private final UserRepository userRepository;
 
     @Override

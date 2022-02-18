@@ -1,8 +1,8 @@
 package uz.pdp.eticketdemo.model.dto;
 
 import lombok.Data;
-import uz.pdp.eticketdemo.model.entity.DocTypeEntity;
-import uz.pdp.eticketdemo.model.entity.UserEntity;
+import uz.pdp.eticketdemo.model.entity.user.DocTypeEntity;
+import uz.pdp.eticketdemo.model.entity.user.UserEntity;
 
 import java.util.Date;
 

@@ -3,17 +3,18 @@ package uz.pdp.eticketdemo.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.PassengerDto;
-import uz.pdp.eticketdemo.model.entity.PassengerEntity;
+import uz.pdp.eticketdemo.model.entity.user.PassengerEntity;
 import uz.pdp.eticketdemo.repository.PassengerRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 
 import java.util.List;
 import java.util.Optional;
+import static uz.pdp.eticketdemo.response.BaseResponse.*;
 
 @Service
 @RequiredArgsConstructor
-public class PassengerService extends BaseResponse implements BaseService<PassengerDto>{
+public class PassengerService implements BaseService<PassengerDto>{
     private final PassengerRepository passengerRepository;
 
     @Override

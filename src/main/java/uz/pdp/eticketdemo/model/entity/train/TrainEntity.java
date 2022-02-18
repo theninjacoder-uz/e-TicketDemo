@@ -1,7 +1,8 @@
-package uz.pdp.eticketdemo.model.entity;
+package uz.pdp.eticketdemo.model.entity.train;
 
 import lombok.Getter;
 import lombok.Setter;
+import uz.pdp.eticketdemo.model.entity.direction.DirectionEntity;
 
 import javax.persistence.*;
 import java.util.Date;
