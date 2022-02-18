@@ -3,6 +3,7 @@ package uz.pdp.eticketdemo.dto;
 import lombok.Data;
 import uz.pdp.eticketdemo.entity.DocTypeEntity;
 import uz.pdp.eticketdemo.entity.UserEntity;
+import uz.pdp.eticketdemo.entity.CountryEntity;
 
 import java.util.Date;
 
