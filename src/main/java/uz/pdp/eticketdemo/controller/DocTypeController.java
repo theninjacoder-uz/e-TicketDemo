@@ -3,9 +3,9 @@ package uz.pdp.eticketdemo.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.eticketdemo.model.dto.DocTypeDto;
+import uz.pdp.eticketdemo.model.dto.user.DocTypeDto;
 import uz.pdp.eticketdemo.response.ApiResponse;
-import uz.pdp.eticketdemo.service.DocTypeService;
+import uz.pdp.eticketdemo.service.user.DocTypeService;
 
 @RestController
 @RequiredArgsConstructor

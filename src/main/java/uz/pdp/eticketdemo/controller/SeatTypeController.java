@@ -5,8 +5,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.eticketdemo.model.dto.SeatTypeDto;
-import uz.pdp.eticketdemo.service.SeatTypeService;
+import uz.pdp.eticketdemo.model.dto.train.SeatTypeDto;
+import uz.pdp.eticketdemo.service.train.SeatTypeService;
 
 @RestController
 @RequiredArgsConstructor
