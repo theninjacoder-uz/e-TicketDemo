@@ -1,26 +1,31 @@
-package uz.pdp.eticketdemo.entity;
+package uz.pdp.eticketdemo.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "seat_status")
-public class SeatStatusEntity {
+@Table(name = "wagon_type")
+public class WagonTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(columnDefinition = "integer default -1")
-    private Integer fromStationOrder;
-    @Column(columnDefinition = "integer default -1")
-    private Integer toStationOrder;
+
+    @Column(nullable = false, unique = true)
+    private String name;
+
+    @Column(nullable = false)
+    private double price;
+
+    @ManyToMany
+    private List<ServicesEntity> services;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date createdDate = new Date();
-
 }

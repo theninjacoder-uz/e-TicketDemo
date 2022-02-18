@@ -1,15 +1,14 @@
-package uz.pdp.eticketdemo.entity;
+package uz.pdp.eticketdemo.model.entity;
 
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "passenger_info")
 public class PassengerEntity {
@@ -22,18 +21,24 @@ public class PassengerEntity {
 
     @Column(nullable = false)
     private String firstName;
+
     private String lastName;
+
     @Column(nullable = false)
     private String gender;
+
     @Column(nullable = false)
     private Date birthDate;
+
     @ManyToOne
     private DocTypeEntity docType;
+
     @Column(nullable = false)
     private String passportNumber;
+
     private Date passportExpirationDate;
 
-    @ManyToMany
+    @ManyToOne
     private CountryEntity citizenship;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

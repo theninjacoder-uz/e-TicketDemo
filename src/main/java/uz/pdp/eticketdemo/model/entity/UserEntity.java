@@ -1,17 +1,14 @@
-package uz.pdp.eticketdemo.entity;
+package uz.pdp.eticketdemo.model.entity;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
-@ToString
+@Getter
+@Setter
 @RequiredArgsConstructor
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "users")
 public class UserEntity {
     @Id
@@ -37,7 +34,6 @@ public class UserEntity {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created_date;
 
-    @Column(name = "user_role_id")
     @ManyToMany
-    private List<RoleEntity> roleEntityList;
+    private List<RoleEntity> userRole;
 }

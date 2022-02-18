@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.entity;
+package uz.pdp.eticketdemo.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,8 +15,11 @@ public class ServicesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String name;
+
     private String description;
+
     private double price;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

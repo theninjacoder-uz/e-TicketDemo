@@ -1,8 +1,7 @@
-package uz.pdp.eticketdemo.entity;
+package uz.pdp.eticketdemo.model.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,17 +9,19 @@ import java.util.Date;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity(name = "country")
-public class CountryEntity {
-
+@Entity
+@Table(name = "station")
+public class StationEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
-    private String country_name;
+    private String name;
+
+    @NonNull
+    @JoinColumn(nullable = false)
+    @OneToOne
+    private AddressEntity address;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)

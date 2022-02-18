@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.dto;
+package uz.pdp.eticketdemo.model.dto;
 
 import lombok.Data;
 

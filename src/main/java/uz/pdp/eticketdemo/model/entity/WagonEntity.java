@@ -1,26 +1,33 @@
-package uz.pdp.eticketdemo.entity;
+package uz.pdp.eticketdemo.model.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
-@ToString
-@RequiredArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "doc_type")
-public class DocTypeEntity {
+@Table(name = "wagon")
+public class WagonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(nullable = false)
-    private String name;
+
+    @ManyToOne
+    private TrainEntity train;
+
+    private Integer number;
+
+    private Integer capacity;
+
+    private Integer availableSeatNumber;
+
+    @ManyToOne
+    private WagonTypeEntity wagonType;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date createdDate = new Date();
-
 }

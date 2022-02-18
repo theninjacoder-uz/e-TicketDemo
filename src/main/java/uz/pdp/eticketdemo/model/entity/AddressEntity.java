@@ -1,32 +1,33 @@
-package uz.pdp.eticketdemo.entity;
+package uz.pdp.eticketdemo.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "region")
-public class RegionEntity {
+@Entity(name = "address")
+public class AddressEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String region_name;
+    private String street_name;
+
+    @Column(nullable = false)
+    private Integer home_number;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created_date;
 
-    @Column(name = "country_id")
     @ManyToOne
-    private CountryEntity countryEntity;
+    private RegionEntity region ;
+
 }
