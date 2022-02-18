@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(name = "seat")
 public class SeatEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer number;

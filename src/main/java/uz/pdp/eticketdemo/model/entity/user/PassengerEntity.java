@@ -15,7 +15,7 @@ import java.util.Date;
 @Table(name = "passenger_info")
 public class PassengerEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -45,5 +45,5 @@ public class PassengerEntity {
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdDate = new Date();
+    private Date createdDate;
 }
