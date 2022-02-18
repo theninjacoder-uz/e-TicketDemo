@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.entity;
+package uz.pdp.eticketdemo.entity.services;
 
 import lombok.Getter;
 import lombok.Setter;

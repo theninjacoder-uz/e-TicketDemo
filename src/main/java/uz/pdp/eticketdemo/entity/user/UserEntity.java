@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.entity;
+package uz.pdp.eticketdemo.entity.user;
 
 import com.sun.istack.NotNull;
 import lombok.*;
