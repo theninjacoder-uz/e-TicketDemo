@@ -1,28 +1,37 @@
-package uz.pdp.eticketdemo.entity.user;
+package uz.pdp.eticketdemo.model.entity;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
-@ToString
+@Getter
+@Setter
 @RequiredArgsConstructor
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity(name = "users")
-public class UserEntity {
+@Entity
+@Table(name = "direction_station", uniqueConstraints = {})
+public class DirectionStationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
-    private String chat_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private StationEntity station;
 
-    @Column(unique = true)
-    private String phoneNumber;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private DirectionEntity direction;
+
+    private Integer stationOrder;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private StationEntity previousStationId;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private StationEntity nextStationId;
+
+    private Double distanceWithPreviousStation;
+    private Double distanceWithNextStation;
 
     @Column(unique = true)
     private String email;
