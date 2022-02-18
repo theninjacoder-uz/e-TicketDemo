@@ -12,7 +12,7 @@ import java.util.Date;
 @Table(name = "seat_status")
 public class SeatStatusEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

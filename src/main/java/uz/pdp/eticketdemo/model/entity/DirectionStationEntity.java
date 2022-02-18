@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "direction_station", uniqueConstraints = {})
 public class DirectionStationEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

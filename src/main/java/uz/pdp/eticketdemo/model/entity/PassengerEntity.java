@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "passenger_info")
 public class PassengerEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

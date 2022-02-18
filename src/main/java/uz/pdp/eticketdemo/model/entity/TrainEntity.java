@@ -12,7 +12,7 @@ import java.util.Date;
 @Table(name = "train")
 public class TrainEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

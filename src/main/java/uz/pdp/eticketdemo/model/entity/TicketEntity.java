@@ -15,7 +15,7 @@ import java.util.Date;
 @Table(name = "ticket")
 public class TicketEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
     private PassengerEntity passenger;
