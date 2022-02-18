@@ -43,5 +43,5 @@ public class PassengerEntity {
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdDate = new Date();
+    private Date createdDate;
 }
