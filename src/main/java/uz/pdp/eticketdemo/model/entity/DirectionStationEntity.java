@@ -19,6 +19,7 @@ public class DirectionStationEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private StationEntity station;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     private DirectionEntity direction;
 
