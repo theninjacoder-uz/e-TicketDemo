@@ -27,6 +27,6 @@ public class RegionEntity {
     private Date created_date;
 
     @Column(name = "country_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private CountryEntity countryEntity;
 }

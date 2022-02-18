@@ -1,10 +1,12 @@
 package uz.pdp.eticketdemo.dto;
 
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import uz.pdp.eticketdemo.entity.UserEntity;
 
-@Data
+@Getter
+@Setter
 public class UserDto extends UserEntity {
 
 }
