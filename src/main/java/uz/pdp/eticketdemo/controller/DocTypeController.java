@@ -1,22 +1,23 @@
 package uz.pdp.eticketdemo.controller;
 
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import uz.pdp.eticketdemo.dto.DocTypeDto;
 import uz.pdp.eticketdemo.dto.PassengerDto;
-import uz.pdp.eticketdemo.dto.SeatTypeDto;
 import uz.pdp.eticketdemo.response.ApiResponse;
+import uz.pdp.eticketdemo.service.DocTypeService;
 import uz.pdp.eticketdemo.service.PassengerService;
-import uz.pdp.eticketdemo.service.SeatTypeService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/passenger")
-public class PassengerController {
-    private final PassengerService service;
+@RequestMapping("/api/doc_type")
+public class DocTypeController {
+    private final DocTypeService service;
 
     @PostMapping("/add")
-    public ApiResponse add(@RequestBody PassengerDto passengerDto){
-        return service.add(passengerDto);
+    public ApiResponse add(@RequestBody DocTypeDto docTypeDto){
+        return service.add(docTypeDto);
     }
 
     @GetMapping("/list")
@@ -30,8 +31,9 @@ public class PassengerController {
     }
 
     @PostMapping("/edit")
-    public ApiResponse edit(@RequestParam(name = "id") Long id, @RequestBody PassengerDto passengerDto){
-        return service.edit(id, passengerDto);
+    public ApiResponse edit(@RequestParam(name = "id") Long id, @RequestBody DocTypeDto docTypeDto){
+        return service.edit(id, docTypeDto);
     }
+
 
 }

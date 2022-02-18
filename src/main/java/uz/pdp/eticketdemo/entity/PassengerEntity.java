@@ -27,12 +27,14 @@ public class PassengerEntity {
     private String gender;
     @Column(nullable = false)
     private Date birthDate;
+    @ManyToOne
+    private DocTypeEntity docType;
     @Column(nullable = false)
     private String passportNumber;
     private Date passportExpirationDate;
 
     @ManyToMany
-    private Country citizenship;
+    private CountryEntity citizenship;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)

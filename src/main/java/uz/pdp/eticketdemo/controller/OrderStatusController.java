@@ -2,21 +2,20 @@ package uz.pdp.eticketdemo.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.eticketdemo.dto.PassengerDto;
-import uz.pdp.eticketdemo.dto.SeatTypeDto;
+import uz.pdp.eticketdemo.dto.OrderStatusDto;
 import uz.pdp.eticketdemo.response.ApiResponse;
+import uz.pdp.eticketdemo.service.OrderStatusService;
 import uz.pdp.eticketdemo.service.PassengerService;
-import uz.pdp.eticketdemo.service.SeatTypeService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/passenger")
-public class PassengerController {
-    private final PassengerService service;
+@RequestMapping("/api/order_status")
+public class OrderStatusController {
+    private final OrderStatusService service;
 
     @PostMapping("/add")
-    public ApiResponse add(@RequestBody PassengerDto passengerDto){
-        return service.add(passengerDto);
+    public ApiResponse add(@RequestBody OrderStatusDto orderStatusDto){
+        return service.add(orderStatusDto);
     }
 
     @GetMapping("/list")
@@ -30,8 +29,7 @@ public class PassengerController {
     }
 
     @PostMapping("/edit")
-    public ApiResponse edit(@RequestParam(name = "id") Long id, @RequestBody PassengerDto passengerDto){
-        return service.edit(id, passengerDto);
+    public ApiResponse edit(@RequestParam(name = "id") Long id, @RequestBody OrderStatusDto orderStatusDto){
+        return service.edit(id, orderStatusDto);
     }
-
 }
