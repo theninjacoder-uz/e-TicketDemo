@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import uz.pdp.eticketdemo.dto.UserDto;
-import uz.pdp.eticketdemo.entity.user.UserEntity;
+import uz.pdp.eticketdemo.model.dto.UserDto;
+import uz.pdp.eticketdemo.model.entity.UserEntity;
 import uz.pdp.eticketdemo.repository.UserRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
@@ -45,7 +45,7 @@ public class UserService extends BaseResponse implements BaseService<UserDto> {
             userRepository.save(userEntity);
             return SUCCESS;
         }
-        return FAILED;
+        return  NOT_FOUND;
     }
 
     @Override
@@ -59,12 +59,12 @@ public class UserService extends BaseResponse implements BaseService<UserDto> {
                 userRepository.save(userEntity);
             return SUCCESS ;
         }
-        return FAILED;
+        return NOT_FOUND;
     }
 
     @Override
     public ApiResponse add(@RequestBody UserDto userDto) {
-        userRepository.save(userDto);
+//        userRepository.save(userDto);
         return null;
     }
 

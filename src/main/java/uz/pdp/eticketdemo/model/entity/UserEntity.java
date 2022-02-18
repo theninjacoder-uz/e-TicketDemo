@@ -1,21 +1,18 @@
-package uz.pdp.eticketdemo.entity.user;
+package uz.pdp.eticketdemo.model.entity;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
-@ToString
+@Getter
+@Setter
 @RequiredArgsConstructor
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "users")
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -35,9 +32,8 @@ public class UserEntity {
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date created_date;
+    private Date createdDate;
 
-    @Column(name = "user_role_id")
     @ManyToMany
-    private List<RoleEntity> roleEntityList;
+    private List<RoleEntity> role;
 }
