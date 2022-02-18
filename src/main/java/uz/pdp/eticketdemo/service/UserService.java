@@ -45,7 +45,7 @@ public class UserService extends BaseResponse implements BaseService<UserDto> {
             userRepository.save(userEntity);
             return SUCCESS;
         }
-        return FAILED;
+        return  NOT_FOUND;
     }
 
     @Override
@@ -59,12 +59,12 @@ public class UserService extends BaseResponse implements BaseService<UserDto> {
                 userRepository.save(userEntity);
             return SUCCESS ;
         }
-        return FAILED;
+        return NOT_FOUND;
     }
 
     @Override
     public ApiResponse add(@RequestBody UserDto userDto) {
-        userRepository.save(userDto);
+//        userRepository.save(userDto);
         return null;
     }
 

@@ -16,6 +16,7 @@ public class TrainEntity {
     private Long id;
 
     private String name;
+
     private String model;
 
     @ManyToOne

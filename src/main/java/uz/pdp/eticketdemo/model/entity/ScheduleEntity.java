@@ -19,8 +19,6 @@ public class ScheduleEntity {
     private String name;
 
 
-
-
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created_date;

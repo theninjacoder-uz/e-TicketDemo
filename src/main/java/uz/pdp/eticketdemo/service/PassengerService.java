@@ -60,7 +60,7 @@ public class PassengerService extends BaseResponse implements BaseService<Passen
             passenger.setDocType(item.getDocType());
             passenger.setPassportNumber(item.getPassportNumber());
             passenger.setPassportExpirationDate(item.getPassportExpirationDate());
-            passenger.setCitizenship(item.getCitizenship());
+//            passenger.setCitizenship(item.getCitizenship());
 
             passengerRepository.save(passenger);
             SUCCESS.setData(passenger);
@@ -82,7 +82,7 @@ public class PassengerService extends BaseResponse implements BaseService<Passen
         passenger.setDocType(item.getDocType());
         passenger.setPassportNumber(item.getPassportNumber());
         passenger.setPassportExpirationDate(item.getPassportExpirationDate());
-        passenger.setCitizenship(item.getCitizenship());
+//        passenger.setCitizenship(item.getCitizenship());
 
         passengerRepository.save(passenger);
         return SUCCESS;

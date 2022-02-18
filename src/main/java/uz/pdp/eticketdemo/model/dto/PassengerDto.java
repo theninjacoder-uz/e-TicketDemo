@@ -18,6 +18,6 @@ public class PassengerDto {
     private DocTypeEntity docType;
     private String passportNumber;
     private Date passportExpirationDate;
-    private CountryEntity citizenship;
+//    private CountryEntity citizenship;
 
 }

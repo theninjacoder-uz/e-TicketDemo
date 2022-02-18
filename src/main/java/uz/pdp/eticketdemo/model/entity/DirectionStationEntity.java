@@ -46,7 +46,4 @@ public class DirectionStationEntity {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created_date;
 
-    @Column(name = "user_role_id")
-    @ManyToMany
-    private List<RoleEntity> roleEntityList;
 }

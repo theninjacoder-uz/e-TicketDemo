@@ -27,8 +27,7 @@ public class AddressEntity {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created_date;
 
-    @Column(name = "region_id")
     @ManyToOne
-    private RegionEntity regionEntity;
+    private RegionEntity region ;
 
 }

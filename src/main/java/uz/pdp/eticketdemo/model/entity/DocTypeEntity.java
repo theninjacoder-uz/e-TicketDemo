@@ -7,9 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "doc_type")
 public class DocTypeEntity {

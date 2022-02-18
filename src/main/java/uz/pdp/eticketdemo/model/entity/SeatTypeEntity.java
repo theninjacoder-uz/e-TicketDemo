@@ -17,6 +17,7 @@ public class SeatTypeEntity {
 
     @Column(unique = true)
     private String name = "simple";
+
     private String description;
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

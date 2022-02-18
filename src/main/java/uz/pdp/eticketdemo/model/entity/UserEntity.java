@@ -9,8 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "users")
 public class UserEntity {
     @Id
@@ -36,7 +34,6 @@ public class UserEntity {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created_date;
 
-    @Column(name = "user_role_id")
     @ManyToMany
-    private List<RoleEntity> roleEntityList;
+    private List<RoleEntity> userRole;
 }

@@ -1,17 +1,13 @@
 package uz.pdp.eticketdemo.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity(name = "region")
 public class RegionEntity {
 
@@ -26,7 +22,6 @@ public class RegionEntity {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created_date;
 
-    @Column(name = "country_id")
     @ManyToOne
-    private CountryEntity countryEntity;
+    private CountryEntity country;
 }
