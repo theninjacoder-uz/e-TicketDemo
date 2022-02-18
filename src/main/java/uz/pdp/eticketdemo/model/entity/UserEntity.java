@@ -32,8 +32,8 @@ public class UserEntity {
 
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date created_date;
+    private Date createdDate;
 
     @ManyToMany
-    private List<RoleEntity> userRole;
+    private List<RoleEntity> role;
 }
