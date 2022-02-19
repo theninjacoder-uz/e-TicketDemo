@@ -35,16 +35,42 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
 
     @Override
     public ApiResponse delete(Long id) {
-        return null;
+        boolean existsById = repository.existsById(id);
+        if(existsById){
+            repository.deleteById(id);
+            return SUCCESS;
+        }
+        return NOT_FOUND;
     }
 
     @Override
     public ApiResponse edit(Long id, TrainDto item) {
-        return null;
+        Optional<TrainEntity> findById = repository.findById(id);
+        if(findById.isPresent()){
+            TrainEntity trainEntity = findById.get();
+            trainEntity.setName(item.getName());
+            trainEntity.setModel(item.getModel());
+            trainEntity.setCapacity(item.getCapacity());
+            trainEntity.setAvailableSeatNumber(item.getAvailableSeatNumber());
+            trainEntity.setAverageSpeed(item.getAverageSpeed());
+
+            repository.save(trainEntity);
+            SUCCESS.setData(trainEntity);
+            return SUCCESS;
+        }
+        return NOT_FOUND;
     }
 
     @Override
     public ApiResponse add(TrainDto item) {
-        return null;
+        TrainEntity trainEntity = new TrainEntity();
+        trainEntity.setName(item.getName());
+        trainEntity.setModel(item.getModel());
+        trainEntity.setCapacity(item.getCapacity());
+        trainEntity.setAvailableSeatNumber(item.getAvailableSeatNumber());
+        trainEntity.setAverageSpeed(item.getAverageSpeed());
+        repository.save(trainEntity);
+        SUCCESS.setData(trainEntity);
+        return SUCCESS;
     }
 }

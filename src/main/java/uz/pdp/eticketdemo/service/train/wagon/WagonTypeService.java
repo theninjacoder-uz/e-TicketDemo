@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.service.train;
+package uz.pdp.eticketdemo.service.train.wagon;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
-package uz.pdp.eticketdemo.model.entity.train;
+package uz.pdp.eticketdemo.model.entity.train.seats;
 
 import lombok.Getter;
 import lombok.Setter;
-import uz.pdp.eticketdemo.model.entity.train.SeatEntity;
+import uz.pdp.eticketdemo.model.entity.train.seats.SeatEntity;
 
 import javax.persistence.*;
 import java.util.Date;

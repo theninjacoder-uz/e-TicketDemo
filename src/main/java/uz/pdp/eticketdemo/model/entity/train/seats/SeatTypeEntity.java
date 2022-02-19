@@ -1,5 +1,4 @@
-package uz.pdp.eticketdemo.model.entity.train;
-
+package uz.pdp.eticketdemo.model.entity.train.seats;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,24 +9,19 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "seat")
-public class SeatEntity {
+@Table(name = "seat_type")
+public class SeatTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer number;
+    @Column(unique = true)
+    private String name = "simple";
 
-    @ManyToOne
-    private WagonEntity wagon;
+    private String description;
 
-    @ManyToOne
-    private SeatTypeEntity seatType;
-//
-//    @OneToMany
-//    private List<SeatStatusEntity> seatStatus;
-//
     @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date createdDate = new Date();
+
 }
