@@ -1,12 +1,21 @@
-package uz.pdp.eticketdemo.service.train;
+package uz.pdp.eticketdemo.service.station;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import uz.pdp.eticketdemo.repository.station.ScheduleRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
 
-
 @Service
-public class TrainService_b implements BaseService<Object>{
+@RequiredArgsConstructor
+public class ScheduleService implements BaseService<Object> {
+
+    private final ScheduleRepository repository;
+
+    public ApiResponse getSchedulesByRegionAndDate(Long fId, Long tId, String date){
+
+    }
+
     @Override
     public ApiResponse getList() {
         return null;
@@ -31,6 +40,4 @@ public class TrainService_b implements BaseService<Object>{
     public ApiResponse add(Object item) {
         return null;
     }
-
-
 }
