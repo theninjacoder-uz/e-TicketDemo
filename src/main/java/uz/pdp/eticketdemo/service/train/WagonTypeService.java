@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.train.WagonTypeDto;
 import uz.pdp.eticketdemo.model.entity.train.WagonEntity;
+import uz.pdp.eticketdemo.model.entity.train.WagonTypeEntity;
 import uz.pdp.eticketdemo.repository.train.WagonTypeRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
@@ -21,16 +22,16 @@ public class WagonTypeService implements BaseService<WagonTypeDto> {
 
     @Override
     public ApiResponse getList() {
-        List<WagonEntity> wagonEntityList = wagonTypeRepository.findAll();
+        List<WagonTypeEntity> wagonEntityList = wagonTypeRepository.findAll();
         SUCCESS.setData(wagonEntityList);
         return SUCCESS;
     }
 
     @Override
     public ApiResponse getById(Long id) {
-        Optional<WagonEntity> wagonEntityOptional = wagonTypeRepository.findById(id);
+        Optional<WagonTypeEntity> wagonEntityOptional = wagonTypeRepository.findById(id);
 
-        if(wagonEntityOptional.isPresent()) {
+        if (wagonEntityOptional.isPresent()) {
             SUCCESS.setData(wagonEntityOptional.get());
             return SUCCESS;
         }
@@ -41,7 +42,7 @@ public class WagonTypeService implements BaseService<WagonTypeDto> {
     @Override
     public ApiResponse delete(Long id) {
         boolean exists = wagonTypeRepository.existsById(id);
-        if(exists) {
+        if (exists) {
             wagonTypeRepository.deleteById(id);
             return SUCCESS;
         }
@@ -50,15 +51,25 @@ public class WagonTypeService implements BaseService<WagonTypeDto> {
 
     @Override
     public ApiResponse edit(Long id, WagonTypeDto item) {
-        Optional<WagonEntity> optionalWagonEntity = wagonTypeRepository.findById(id);
-        if(optionalWagonEntity.isPresent()){
-            
+        Optional<WagonTypeEntity> optionalWagonEntity = wagonTypeRepository.findById(id);
+        if (optionalWagonEntity.isPresent()) {
+            WagonTypeEntity wagonTypeEntity = optionalWagonEntity.get();
+            wagonTypeEntity.setName(item.getName());
+            wagonTypeEntity.setPrice(item.getPrice());
+
+            wagonTypeRepository.save(wagonTypeEntity);
+            SUCCESS.setData(wagonTypeEntity);
+            return SUCCESS;
         }
-        return null;
+        return SUCCESS;
     }
 
     @Override
     public ApiResponse add(WagonTypeDto item) {
+        WagonTypeEntity wagonType = new WagonTypeEntity();
+        wagonType.setName(item.getName());
+        wagonType.setPrice(item.getPrice());
+        wagonTypeRepository.save(wagonType);
         return null;
     }
 }

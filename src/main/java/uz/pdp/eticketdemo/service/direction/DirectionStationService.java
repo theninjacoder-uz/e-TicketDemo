@@ -3,7 +3,6 @@ package uz.pdp.eticketdemo.service.direction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import uz.pdp.eticketdemo.model.dto.direction.DirectionDto;
 import uz.pdp.eticketdemo.model.dto.direction.DirectionStationDto;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 import uz.pdp.eticketdemo.repository.direction.DirectionStationRepository;
@@ -53,6 +52,8 @@ public class DirectionStationService extends BaseResponse implements BaseService
         if(byId.isPresent()){
             DirectionStationEntity directionStationEntity = byId.get();
             directionStationEntity.setStationOrder(item.getStationOrder());
+            directionStationEntity.setDistanceWithPreviousStation(item.getDistanceWithPreviousStation());
+            directionStationEntity.setDistanceWithNextStation(item.getDistanceWithNextStation());
             directionStationEntity.setEmail(item.getEmail());
             directionStationEntity.setPassword(item.getPassword());
 
