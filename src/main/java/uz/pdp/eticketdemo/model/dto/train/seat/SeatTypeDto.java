@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.model.dto.train;
+package uz.pdp.eticketdemo.model.dto.train.seat;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

@@ -6,7 +6,7 @@ import lombok.Setter;
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 import uz.pdp.eticketdemo.model.entity.order.OrderStatusEntity;
 import uz.pdp.eticketdemo.model.entity.station.StationEntity;
-import uz.pdp.eticketdemo.model.entity.train.SeatEntity;
+import uz.pdp.eticketdemo.model.entity.train.seats.SeatEntity;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
 import uz.pdp.eticketdemo.model.entity.train.WagonEntity;
 import uz.pdp.eticketdemo.model.entity.user.PassengerEntity;
