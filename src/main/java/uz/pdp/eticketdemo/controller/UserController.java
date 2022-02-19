@@ -1,9 +1,9 @@
 package uz.pdp.eticketdemo.controller;
 
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.eticketdemo.model.dto.UserDto;
+import uz.pdp.eticketdemo.model.dto.user.UserDto;
 import uz.pdp.eticketdemo.response.ApiResponse;
-import uz.pdp.eticketdemo.service.UserService;
+import uz.pdp.eticketdemo.service.user.UserService;
 
 @RestController
 @RequestMapping("/api/user")

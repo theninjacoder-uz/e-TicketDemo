@@ -2,9 +2,9 @@ package uz.pdp.eticketdemo.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.eticketdemo.model.dto.OrderStatusDto;
+import uz.pdp.eticketdemo.model.dto.ticket.OrderStatusDto;
 import uz.pdp.eticketdemo.response.ApiResponse;
-import uz.pdp.eticketdemo.service.OrderStatusService;
+import uz.pdp.eticketdemo.service.ticket.OrderStatusService;
 
 @RestController
 @RequiredArgsConstructor

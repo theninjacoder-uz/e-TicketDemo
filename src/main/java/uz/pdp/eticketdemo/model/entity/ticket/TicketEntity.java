@@ -1,0 +1,46 @@
+package uz.pdp.eticketdemo.model.entity.ticket;
+
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+import uz.pdp.eticketdemo.model.entity.station.StationEntity;
+import uz.pdp.eticketdemo.model.entity.train.SeatEntity;
+import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
+import uz.pdp.eticketdemo.model.entity.train.WagonEntity;
+import uz.pdp.eticketdemo.model.entity.user.PassengerEntity;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "ticket")
+public class TicketEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToOne
+    private PassengerEntity passenger;
+    @ManyToOne
+    private TrainEntity train;
+    @ManyToOne
+    private StationEntity fromStation;
+    @ManyToOne
+    private StationEntity toStation;
+    @NonNull
+    private Date date;
+    @ManyToOne
+    private WagonEntity wagon;
+    @OneToOne
+    private SeatEntity seat;
+    @ManyToOne
+    private OrderStatusEntity orderStatus;
+    @NonNull
+    private Double price;
+
+    @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+}
