@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.model.entity.user;
 
 import lombok.*;
+import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,15 +11,9 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "doc_type")
-public class DocTypeEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class DocTypeEntity extends BaseEntity {
+
     @Column(nullable = false)
     private String name;
-
-    @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdDate;
 
 }

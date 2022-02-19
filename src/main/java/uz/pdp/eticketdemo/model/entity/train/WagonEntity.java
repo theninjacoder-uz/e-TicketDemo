@@ -2,6 +2,7 @@ package uz.pdp.eticketdemo.model.entity.train;
 
 import lombok.Getter;
 import lombok.Setter;
+import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,10 +11,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "wagon")
-public class WagonEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class WagonEntity extends BaseEntity {
 
     @ManyToOne
     private TrainEntity train;
@@ -26,8 +24,4 @@ public class WagonEntity {
 
     @ManyToOne
     private WagonTypeEntity wagonType;
-
-    @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdDate = new Date();
 }

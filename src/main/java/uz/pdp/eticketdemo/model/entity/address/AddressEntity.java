@@ -11,14 +11,15 @@ import java.util.Date;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "address")
+@Entity
+@Table(name = "address")
 public class AddressEntity extends BaseEntity {
 
     @Column(nullable = false)
-    private String street_name;
+    private String streetName;
 
     @Column(nullable = false)
-    private Integer home_number;
+    private Integer homeNumber;
 
     @ManyToOne
     private RegionEntity region ;

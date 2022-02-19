@@ -2,6 +2,7 @@ package uz.pdp.eticketdemo.model.entity.train;
 
 import lombok.Getter;
 import lombok.Setter;
+import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 import uz.pdp.eticketdemo.model.entity.ticket.ServicesEntity;
 
 import javax.persistence.*;
@@ -12,10 +13,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "wagon_type")
-public class WagonTypeEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class WagonTypeEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     private String name;
@@ -26,7 +24,4 @@ public class WagonTypeEntity {
     @ManyToMany
     private List<ServicesEntity> services;
 
-    @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdDate = new Date();
 }

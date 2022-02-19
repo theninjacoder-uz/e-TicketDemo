@@ -2,6 +2,7 @@ package uz.pdp.eticketdemo.model.entity.user;
 
 import lombok.*;
 import uz.pdp.eticketdemo.model.entity.address.CountryEntity;
+import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 import uz.pdp.eticketdemo.model.entity.user.DocTypeEntity;
 import uz.pdp.eticketdemo.model.entity.user.UserEntity;
 
@@ -13,10 +14,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "passenger_info")
-public class PassengerEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class PassengerEntity extends BaseEntity {
 
     @ManyToOne
     private UserEntity userEntity;
@@ -43,7 +41,4 @@ public class PassengerEntity {
     @ManyToOne
     private CountryEntity citizenship;
 
-    @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdDate;
 }

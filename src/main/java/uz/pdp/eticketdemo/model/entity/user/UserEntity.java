@@ -1,19 +1,17 @@
 package uz.pdp.eticketdemo.model.entity.user;
 
 import lombok.*;
+import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
+import uz.pdp.eticketdemo.model.entity.role.RoleEntity;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
 @Entity(name = "users")
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserEntity extends BaseEntity {
 
     @Column
     private String chat_id;
@@ -29,10 +27,6 @@ public class UserEntity {
 
     @Column(columnDefinition = "boolean default true")
     private Boolean userStatus;
-
-    @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdDate;
 
     @ManyToMany
     private List<RoleEntity> role;
