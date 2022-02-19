@@ -1,20 +1,20 @@
-package uz.pdp.eticketdemo.service;
+package uz.pdp.eticketdemo.service.address;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import uz.pdp.eticketdemo.dto.AddressDto;
-import uz.pdp.eticketdemo.entity.AddressEntity;
+import uz.pdp.eticketdemo.model.dto.address.CountryDto;
+import uz.pdp.eticketdemo.model.entity.address.AddressEntity;
 import uz.pdp.eticketdemo.repository.AddressRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
+import uz.pdp.eticketdemo.service.base.BaseService;
 
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class AddressService extends BaseResponse implements BaseService<AddressDto> {
+public class AddressService extends BaseResponse implements BaseService<CountryDto.AddressDto> {
 
     private final AddressRepository addressRepository;
 
@@ -34,7 +34,7 @@ public class AddressService extends BaseResponse implements BaseService<AddressD
             SUCCESS.setData(addressEntity);
             return SUCCESS;
         }
-        return FAILED;
+        return NOT_FOUND;
     }
 
     @Override
@@ -44,11 +44,11 @@ public class AddressService extends BaseResponse implements BaseService<AddressD
             addressRepository.deleteById(id);
             return SUCCESS;
         }
-        return FAILED;
+        return NOT_FOUND;
     }
 
     @Override
-    public ApiResponse edit(@PathVariable Long id, @RequestBody AddressDto addressDto) {
+    public ApiResponse edit(@PathVariable Long id, @RequestBody CountryDto.AddressDto addressDto) {
         Optional<AddressEntity> findById = addressRepository.findById(id);
           if(findById.isPresent()){
               AddressEntity addressEntity = findById.get();
@@ -57,11 +57,11 @@ public class AddressService extends BaseResponse implements BaseService<AddressD
               addressRepository.save(addressEntity);
               return SUCCESS;
           }
-        return FAILED;
+        return NOT_FOUND;
     }
 
     @Override
-    public ApiResponse add(AddressDto item) {
+    public ApiResponse add(CountryDto.AddressDto item) {
         addressRepository.save(item);
         return null;
     }

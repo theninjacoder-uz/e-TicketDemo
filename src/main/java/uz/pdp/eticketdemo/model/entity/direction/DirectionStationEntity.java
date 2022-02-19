@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.model.entity.direction;
 
 import lombok.*;
+import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "direction_station", uniqueConstraints = {})
-public class DirectionStationEntity {
+public class DirectionStationEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,11 +41,7 @@ public class DirectionStationEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column(columnDefinition = "boolean default true")
-    private Boolean userStatus;
-
-    @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date created_date;
+//    @Column(columnDefinition = "boolean default true")
+//    private Boolean userStatus;
 
 }

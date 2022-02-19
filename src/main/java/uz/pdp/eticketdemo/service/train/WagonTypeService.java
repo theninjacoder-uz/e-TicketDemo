@@ -54,8 +54,6 @@ public class WagonTypeService implements BaseService<WagonTypeDto> {
         if(optionalWagonEntity.isPresent()){
             
         }
-
-
         return null;
     }
 
