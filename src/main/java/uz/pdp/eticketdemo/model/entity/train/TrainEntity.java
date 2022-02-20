@@ -1,5 +1,6 @@
 package uz.pdp.eticketdemo.model.entity.train;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
@@ -7,6 +8,7 @@ import uz.pdp.eticketdemo.model.entity.direction.DirectionEntity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,8 +20,12 @@ public class TrainEntity extends BaseEntity {
 
     private String model;
 
-    @ManyToOne
-    private DirectionEntity direction;
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "trainList"
+    )
+    private List<DirectionEntity> directionList;
 
     private Integer capacity;
 
