@@ -14,7 +14,7 @@ import java.util.Date;
 public class RegionEntity extends BaseEntity {
 
     @Column(nullable = false)
-    private String region_name;
+    private String regionName;
 
     @ManyToOne
     private CountryEntity country;

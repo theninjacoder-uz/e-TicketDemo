@@ -54,8 +54,6 @@ public class DirectionStationService extends BaseResponse implements BaseService
             directionStationEntity.setStationOrder(item.getStationOrder());
             directionStationEntity.setDistanceWithPreviousStation(item.getDistanceWithPreviousStation());
             directionStationEntity.setDistanceWithNextStation(item.getDistanceWithNextStation());
-            directionStationEntity.setEmail(item.getEmail());
-            directionStationEntity.setPassword(item.getPassword());
 
             directionStationRepository.save(directionStationEntity);
             SUCCESS.setData(directionStationEntity);
@@ -69,8 +67,6 @@ public class DirectionStationService extends BaseResponse implements BaseService
     public ApiResponse add(DirectionStationDto item) {
         DirectionStationEntity directionStation = new DirectionStationEntity();
         directionStation.setStationOrder(item.getStationOrder());
-        directionStation.setEmail(item.getEmail());
-        directionStation.setPassword(item.getPassword());
         directionStationRepository.save(directionStation);
         return SUCCESS;
     }

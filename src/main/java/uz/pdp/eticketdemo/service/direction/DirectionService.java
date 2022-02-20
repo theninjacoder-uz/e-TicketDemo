@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import uz.pdp.eticketdemo.model.dto.direction.DirectionDto;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionEntity;
+import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 import uz.pdp.eticketdemo.repository.direction.DirectionRepository;
+import uz.pdp.eticketdemo.repository.direction.DirectionStationRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
@@ -67,4 +69,6 @@ public class DirectionService extends BaseResponse implements BaseService<Direct
         directionRepository.save(direction);
         return SUCCESS;
     }
+
+
 }

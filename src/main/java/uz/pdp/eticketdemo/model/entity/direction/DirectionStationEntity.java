@@ -32,13 +32,4 @@ public class DirectionStationEntity extends BaseEntity {
     private Double distanceWithPreviousStation;
     private Double distanceWithNextStation;
 
-    @Column(unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column(columnDefinition = "boolean default true")
-    private Boolean userStatus;
-
 }

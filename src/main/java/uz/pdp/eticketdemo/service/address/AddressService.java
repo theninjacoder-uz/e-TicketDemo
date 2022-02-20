@@ -52,8 +52,8 @@ public class AddressService extends BaseResponse implements BaseService<CountryD
         Optional<AddressEntity> findById = addressRepository.findById(id);
           if(findById.isPresent()){
               AddressEntity addressEntity = findById.get();
-              addressEntity.setStreet_name(addressDto.getStreet_name());
-              addressEntity.setHome_number(addressDto.getHome_number());
+              addressEntity.setStreetName(addressDto.getStreetName());
+              addressEntity.setHomeNumber(addressDto.getHomeNumber());
               addressRepository.save(addressEntity);
               return SUCCESS;
           }

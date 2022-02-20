@@ -33,6 +33,11 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
         return NOT_FOUND;
     }
 
+    public Optional<TrainEntity> getOptionalTrainEntityById(Long id) {
+        Optional<TrainEntity> byId = repository.findById(id);
+        return byId;
+    }
+
     @Override
     public ApiResponse delete(Long id) {
         boolean existsById = repository.existsById(id);

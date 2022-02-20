@@ -52,7 +52,7 @@ public class RegionService extends BaseResponse implements BaseService<RegionDto
         if(optional.isPresent()){
             RegionEntity region = optional.get();
 
-            region.setRegion_name(item.getRegion_name());
+            region.setRegionName(item.getRegionName());
             region.setCountry(item.getCountry());
 
             regionRepository.save(region);
@@ -67,7 +67,7 @@ public class RegionService extends BaseResponse implements BaseService<RegionDto
     public ApiResponse add(RegionDto item) {
         RegionEntity region=new RegionEntity();
 
-        region.setRegion_name(item.getRegion_name());
+        region.setRegionName(item.getRegionName());
         region.setCountry(item.getCountry());
 
         regionRepository.save(region);
