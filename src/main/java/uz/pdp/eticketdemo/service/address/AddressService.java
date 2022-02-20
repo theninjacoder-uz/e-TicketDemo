@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import uz.pdp.eticketdemo.model.dto.address.CountryDto;
 import uz.pdp.eticketdemo.model.entity.address.AddressEntity;
-import uz.pdp.eticketdemo.repository.AddressRepository;
+import uz.pdp.eticketdemo.repository.address.AddressRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
