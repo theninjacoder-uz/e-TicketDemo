@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.controller;
+package uz.pdp.eticketdemo.controller.user;
 
 
 import lombok.RequiredArgsConstructor;

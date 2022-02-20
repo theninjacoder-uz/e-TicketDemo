@@ -2,6 +2,7 @@ package uz.pdp.eticketdemo.model.entity.ticket;
 
 import lombok.Getter;
 import lombok.Setter;
+import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,11 +11,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "services")
-public class ServicesEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ServicesEntity extends BaseEntity {
 
     private String name;
 
@@ -22,7 +19,4 @@ public class ServicesEntity {
 
     private double price;
 
-    @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdDate = new Date();
 }

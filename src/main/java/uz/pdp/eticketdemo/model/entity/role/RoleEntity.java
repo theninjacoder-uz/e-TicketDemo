@@ -1,10 +1,8 @@
-package uz.pdp.eticketdemo.model.entity.user;
+package uz.pdp.eticketdemo.model.entity.role;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.pdp.eticketdemo.enums.RoleType;
 
 import javax.persistence.*;
 

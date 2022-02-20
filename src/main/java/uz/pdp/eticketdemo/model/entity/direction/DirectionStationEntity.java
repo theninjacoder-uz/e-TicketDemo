@@ -13,9 +13,6 @@ import java.util.Date;
 @Entity
 @Table(name = "direction_station", uniqueConstraints = {})
 public class DirectionStationEntity extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private StationEntity station;
@@ -41,7 +38,7 @@ public class DirectionStationEntity extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-//    @Column(columnDefinition = "boolean default true")
-//    private Boolean userStatus;
+    @Column(columnDefinition = "boolean default true")
+    private Boolean userStatus;
 
 }

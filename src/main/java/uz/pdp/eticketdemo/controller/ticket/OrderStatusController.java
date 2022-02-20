@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.controller;
+package uz.pdp.eticketdemo.controller.ticket;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -3,6 +3,8 @@ package uz.pdp.eticketdemo.model.entity.ticket;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
+import uz.pdp.eticketdemo.model.entity.order.OrderStatusEntity;
 import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 import uz.pdp.eticketdemo.model.entity.train.seats.SeatEntity;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
@@ -16,10 +18,8 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "ticket")
-public class TicketEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class TicketEntity extends BaseEntity {
+
     @OneToOne
     private PassengerEntity passenger;
     @ManyToOne
@@ -38,9 +38,5 @@ public class TicketEntity {
     private OrderStatusEntity orderStatus;
     @NonNull
     private Double price;
-
-    @Column(updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdDate;
 
 }

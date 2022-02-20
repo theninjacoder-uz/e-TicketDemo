@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.enums;
+package uz.pdp.eticketdemo.model.entity.role;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
