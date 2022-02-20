@@ -64,17 +64,24 @@ public class ScheduleService implements BaseService<ScheduleDto> {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(startDateTime, formatter);
 
-
-        for (DirectionStationEntity station : directionStationList) {
-
-
+        for (DirectionStationEntity directionStation : directionStationList) {
             ScheduleEntity schedule = new ScheduleEntity();
+            dateTime = dateTime.plusMinutes(stationStopMinutes);
+
             schedule.setTrainId(trainId);
             schedule.setArrivalTime(dateTime);
-            schedule.setDepartureTime(dateTime.plusMinutes(stationStopMinutes));
-            schedule.setStationId(station.getStation().getId());
+            schedule.setDepartureTime(dateTime);
+            schedule.setStationId(directionStation.getStationId());
+            schedule.setTrainStatus(true);
 
+            Double distanceWithNextStation = directionStation.getDistanceWithNextStation();
+            int minutes = (int) (distanceWithNextStation / train.getAverageSpeed() * 60);
+
+            dateTime = dateTime.plusMinutes(minutes);
+            scheduleRepository.save(schedule);
         }
+
+        //TODO some optimizations needed
 
         return BaseResponse.SUCCESS;
     }

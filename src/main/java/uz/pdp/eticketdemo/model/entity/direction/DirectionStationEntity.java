@@ -11,15 +11,19 @@ import java.util.Date;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name = "direction_station", uniqueConstraints = {})
-public class DirectionStationEntity extends BaseEntity {
+@Table(name = "direction_station", uniqueConstraints = {@UniqueConstraint(columnNames = {"stationId", "directionId"})})
+public class DirectionStationEntity{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private StationEntity station;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private StationEntity station;
+    private long stationId;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private DirectionEntity direction;
+//    @ManyToOne(fetch = FetchType.LAZY)
+    private long directionId;
 
     private Integer stationOrder;
 
@@ -29,7 +33,6 @@ public class DirectionStationEntity extends BaseEntity {
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    private StationEntity nextStationId;
 
-    private Double distanceWithPreviousStation;
+//    private Double distanceWithPreviousStation;
     private Double distanceWithNextStation;
-
 }
