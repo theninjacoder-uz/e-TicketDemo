@@ -1,10 +1,12 @@
-package uz.pdp.eticketdemo.model.entity.seat;
+package uz.pdp.eticketdemo.model.entity.train;
 
 import lombok.Getter;
 import lombok.Setter;
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
+import uz.pdp.eticketdemo.model.entity.train.SeatEntity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -13,7 +15,7 @@ import javax.persistence.*;
 public class SeatStatusEntity extends BaseEntity {
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private SeatEntity seat;
 
     @Column(columnDefinition = "integer default -1")
