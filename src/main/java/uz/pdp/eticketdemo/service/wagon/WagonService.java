@@ -2,11 +2,12 @@ package uz.pdp.eticketdemo.service.wagon;
 
 import lombok.RequiredArgsConstructor;
 import uz.pdp.eticketdemo.model.dto.train.WagonDto;
-import uz.pdp.eticketdemo.model.entity.train.WagonEntity;
-import uz.pdp.eticketdemo.repository.train.WagonRepository;
+import uz.pdp.eticketdemo.model.entity.wagon.WagonEntity;
+import uz.pdp.eticketdemo.repository.wagon.WagonRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
+import uz.pdp.eticketdemo.service.seat.SeatService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class WagonService extends BaseResponse implements BaseService<WagonDto> {
 
     private final WagonRepository wagonRepository;
+    private final SeatService seatService;
 
     @Override
     public ApiResponse getList() {
@@ -53,7 +55,6 @@ public class WagonService extends BaseResponse implements BaseService<WagonDto> 
             WagonEntity wagonEntity = byId.get();
             wagonEntity.setNumber(item.getNumber());
             wagonEntity.setCapacity(item.getCapacity());
-            wagonEntity.setAvailableSeatNumber(item.getAvailableSeatNumber());
 
             wagonRepository.save(wagonEntity);
             SUCCESS.setData(wagonEntity);
@@ -68,9 +69,12 @@ public class WagonService extends BaseResponse implements BaseService<WagonDto> 
         WagonEntity wagonEntity = new WagonEntity();
         wagonEntity.setNumber(item.getNumber());
         wagonEntity.setCapacity(item.getCapacity());
-        wagonEntity.setAvailableSeatNumber(item.getAvailableSeatNumber());
+        wagonEntity.setWagonType(item.getWagonType());
+        wagonEntity.setTrain(item.getTrainEntity());
 
-        wagonRepository.save(wagonEntity);
+        WagonEntity entity = wagonRepository.save(wagonEntity);
+        seatService.generateSeats(entity, item.getCapacity());
+
         SUCCESS.setData(wagonEntity);
         return SUCCESS;
     }

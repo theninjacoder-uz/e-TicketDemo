@@ -3,9 +3,8 @@ package uz.pdp.eticketdemo.service.wagon;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.train.WagonTypeDto;
-import uz.pdp.eticketdemo.model.entity.train.WagonEntity;
-import uz.pdp.eticketdemo.model.entity.train.WagonTypeEntity;
-import uz.pdp.eticketdemo.repository.train.WagonTypeRepository;
+import uz.pdp.eticketdemo.model.entity.wagon.WagonTypeEntity;
+import uz.pdp.eticketdemo.repository.wagon.WagonTypeRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
 
@@ -22,8 +21,8 @@ public class WagonTypeService implements BaseService<WagonTypeDto> {
 
     @Override
     public ApiResponse getList() {
-        List<WagonTypeEntity> wagonEntityList = wagonTypeRepository.findAll();
-        SUCCESS.setData(wagonEntityList);
+        List<WagonTypeEntity> wagonTypeEntityList = wagonTypeRepository.findAll();
+        SUCCESS.setData(wagonTypeEntityList);
         return SUCCESS;
     }
 
@@ -51,9 +50,9 @@ public class WagonTypeService implements BaseService<WagonTypeDto> {
 
     @Override
     public ApiResponse edit(Long id, WagonTypeDto item) {
-        Optional<WagonTypeEntity> optionalWagonEntity = wagonTypeRepository.findById(id);
-        if (optionalWagonEntity.isPresent()) {
-            WagonTypeEntity wagonTypeEntity = optionalWagonEntity.get();
+        Optional<WagonTypeEntity> wagonType = wagonTypeRepository.findById(id);
+        if (wagonType.isPresent()) {
+            WagonTypeEntity wagonTypeEntity = wagonType.get();
             wagonTypeEntity.setName(item.getName());
             wagonTypeEntity.setPrice(item.getPrice());
 
