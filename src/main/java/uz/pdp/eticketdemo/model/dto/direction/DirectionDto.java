@@ -1,7 +1,14 @@
 package uz.pdp.eticketdemo.model.dto.direction;
 
-import uz.pdp.eticketdemo.model.entity.direction.DirectionEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class DirectionDto {
     private String name;
 }

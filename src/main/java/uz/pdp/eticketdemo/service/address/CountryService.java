@@ -53,7 +53,7 @@ public class CountryService extends BaseResponse implements BaseService<CountryD
         if(optional.isPresent()){
             CountryEntity country = optional.get();
 
-            country.setCountry_name(item.getName());
+            country.setCountryName(item.getName());
 
             countryRepository.save(country);
             SUCCESS.setData(country);
@@ -67,7 +67,7 @@ public class CountryService extends BaseResponse implements BaseService<CountryD
     public ApiResponse add(CountryDto item) {
         CountryEntity country=new CountryEntity();
 
-        country.setCountry_name(item.getName());
+        country.setCountryName(item.getName());
 
         countryRepository.save(country);
 

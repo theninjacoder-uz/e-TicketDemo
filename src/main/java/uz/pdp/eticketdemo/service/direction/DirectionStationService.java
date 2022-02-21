@@ -1,6 +1,8 @@
 package uz.pdp.eticketdemo.service.direction;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import uz.pdp.eticketdemo.model.dto.direction.DirectionStationDto;
@@ -16,7 +18,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class DirectionStationService extends BaseResponse implements BaseService<DirectionStationDto> {
 
+    @Autowired
     private final DirectionStationRepository directionStationRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     public ApiResponse getList() {
@@ -27,7 +32,7 @@ public class DirectionStationService extends BaseResponse implements BaseService
     }
 
     @Override
-    public ApiResponse getById(@PathVariable Long id) {
+    public ApiResponse getById(Long id) {
         Optional<DirectionStationEntity> byId = directionStationRepository.findById(id);
         if(byId.isPresent()){
             SUCCESS.setData(byId.get());
@@ -37,7 +42,7 @@ public class DirectionStationService extends BaseResponse implements BaseService
     }
 
     @Override
-    public ApiResponse delete(@PathVariable Long id) {
+    public ApiResponse delete(Long id) {
         boolean existsById = directionStationRepository.existsById(id);
         if(existsById){
             directionStationRepository.deleteById(id);
@@ -47,18 +52,13 @@ public class DirectionStationService extends BaseResponse implements BaseService
     }
 
     @Override
-    public ApiResponse edit(@PathVariable Long id, @RequestBody DirectionStationDto item) {
+    public ApiResponse edit(Long id, DirectionStationDto item) {
         Optional<DirectionStationEntity> byId = directionStationRepository.findById(id);
         if(byId.isPresent()){
-            DirectionStationEntity directionStationEntity = byId.get();
-            directionStationEntity.setStationOrder(item.getStationOrder());
-            directionStationEntity.setDistanceWithPreviousStation(item.getDistanceWithPreviousStation());
-            directionStationEntity.setDistanceWithNextStation(item.getDistanceWithNextStation());
-            directionStationEntity.setEmail(item.getEmail());
-            directionStationEntity.setPassword(item.getPassword());
 
-            directionStationRepository.save(directionStationEntity);
-            SUCCESS.setData(directionStationEntity);
+            DirectionStationEntity entity = modelMapper.map(item, DirectionStationEntity.class);
+            directionStationRepository.save(entity);
+
             return SUCCESS;
         }
 
@@ -67,11 +67,11 @@ public class DirectionStationService extends BaseResponse implements BaseService
 
     @Override
     public ApiResponse add(DirectionStationDto item) {
-        DirectionStationEntity directionStation = new DirectionStationEntity();
-        directionStation.setStationOrder(item.getStationOrder());
-        directionStation.setEmail(item.getEmail());
-        directionStation.setPassword(item.getPassword());
-        directionStationRepository.save(directionStation);
+
+        directionStationRepository.updateStationOrder(item.getDirectionId(), item.getStationOrder());
+        DirectionStationEntity entity = modelMapper.map(item, DirectionStationEntity.class);
+        directionStationRepository.save(entity);
+
         return SUCCESS;
     }
 }

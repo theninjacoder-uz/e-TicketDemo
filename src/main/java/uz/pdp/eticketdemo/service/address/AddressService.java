@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import uz.pdp.eticketdemo.model.dto.address.CountryDto;
 import uz.pdp.eticketdemo.model.entity.address.AddressEntity;
-import uz.pdp.eticketdemo.repository.AddressRepository;
+import uz.pdp.eticketdemo.repository.address.AddressRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
@@ -52,8 +52,8 @@ public class AddressService extends BaseResponse implements BaseService<CountryD
         Optional<AddressEntity> findById = addressRepository.findById(id);
           if(findById.isPresent()){
               AddressEntity addressEntity = findById.get();
-              addressEntity.setStreet_name(addressDto.getStreet_name());
-              addressEntity.setHome_number(addressDto.getHome_number());
+              addressEntity.setStreetName(addressDto.getStreetName());
+              addressEntity.setHomeNumber(addressDto.getHomeNumber());
               addressRepository.save(addressEntity);
               return SUCCESS;
           }

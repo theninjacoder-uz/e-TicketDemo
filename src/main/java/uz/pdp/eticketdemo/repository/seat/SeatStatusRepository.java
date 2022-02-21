@@ -1,7 +1,8 @@
-package uz.pdp.eticketdemo.repository.train.seat;
+package uz.pdp.eticketdemo.repository.seat;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.pdp.eticketdemo.model.entity.train.seats.SeatStatusEntity;
+import uz.pdp.eticketdemo.model.entity.seat.SeatStatusEntity;
 
 public interface SeatStatusRepository extends JpaRepository<SeatStatusEntity, Long> {
 

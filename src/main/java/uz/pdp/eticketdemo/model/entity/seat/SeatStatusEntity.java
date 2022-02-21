@@ -1,12 +1,15 @@
 package uz.pdp.eticketdemo.model.entity.train;
+package uz.pdp.eticketdemo.model.entity.seat;
 
 import lombok.Getter;
 import lombok.Setter;
+<<<<<<<<< Temporary merge branch 1:src/main/java/uz/pdp/eticketdemo/model/entity/train/seats/SeatStatusEntity.java
+import uz.pdp.eticketdemo.model.entity.train.seats.SeatEntity;
+=========
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 import uz.pdp.eticketdemo.model.entity.train.SeatEntity;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -15,7 +18,7 @@ import java.util.Date;
 public class SeatStatusEntity extends BaseEntity {
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private SeatEntity seat;
 
     @Column(columnDefinition = "integer default -1")

@@ -1,11 +1,15 @@
 package uz.pdp.eticketdemo.model.entity.train.seats;
 
+
 import lombok.Getter;
 import lombok.Setter;
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 import uz.pdp.eticketdemo.model.entity.train.WagonEntity;
+import uz.pdp.eticketdemo.model.entity.train.WagonEntity;
 import uz.pdp.eticketdemo.model.entity.train.seats.SeatTypeEntity;
 
+import javax.persistence.*;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -23,8 +27,12 @@ public class SeatEntity extends BaseEntity {
 
     @ManyToOne
     private SeatTypeEntity seatType;
-//
-//    @OneToMany
-//    private List<SeatStatusEntity> seatStatus;
-//
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "seat"
+    )
+    private List<SeatStatusEntity> seatStatus;
+
 }

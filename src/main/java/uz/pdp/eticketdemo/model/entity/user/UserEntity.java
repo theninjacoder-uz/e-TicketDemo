@@ -14,7 +14,7 @@ import java.util.List;
 public class UserEntity extends BaseEntity {
 
     @Column
-    private String chat_id;
+    private String chatId;
 
     @Column(unique = true)
     private String phoneNumber;

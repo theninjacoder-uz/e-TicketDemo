@@ -2,7 +2,7 @@ package uz.pdp.eticketdemo.repository.station;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import uz.pdp.eticketdemo.model.entity.train.ScheduleEntity;
+import uz.pdp.eticketdemo.model.entity.schedule.ScheduleEntity;
 
 import java.util.List;
 
