@@ -15,10 +15,13 @@ import java.util.Date;
 public class ScheduleEntity extends BaseEntity {
 
     private String name;
+    private String travelDate;
+
     private long trainId;
     private long stationId;
+
     private LocalDateTime arrivalTime;
     private LocalDateTime departureTime;
-    private boolean trainStatus;
 
+//    private boolean trainStatus;
 }

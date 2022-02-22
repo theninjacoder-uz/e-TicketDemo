@@ -6,6 +6,7 @@ import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 import uz.pdp.eticketdemo.model.entity.wagon.WagonEntity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,8 +21,11 @@ public class SeatEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private SeatType seatType;
-//
-//    @OneToMany
-//    private List<SeatStatusEntity> seatStatus;
-//
+
+    @OneToMany(
+            mappedBy = "seat",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<SeatStatusEntity> seatStatus;
 }

@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.service.schedule;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.schedule.ScheduleDto;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
@@ -25,6 +26,7 @@ public class ScheduleService implements BaseService<ScheduleDto> {
     public final ScheduleRepository scheduleRepository;
     private final DirectionStationRepository directionStationRepository;
     private final TrainService trainService;
+    private final ModelMapper modelMapper;
 
 
     @Override
@@ -52,25 +54,42 @@ public class ScheduleService implements BaseService<ScheduleDto> {
         return null;
     }
 
-    public ApiResponse generateScheduleForTrain(Long directionId, Long trainId, String startDateTime, Integer stationStopMinutes){
-        List<DirectionStationEntity> directionStationList = directionStationRepository.getDirectionStationEntitiesByDirectionIdOrderByStationOrder(directionId);
-        Optional<TrainEntity> optionalTrainEntityById = trainService.getOptionalTrainEntityById(directionId);
+    //Generate schedule by directionStationList, trainId and travel start dateTime
+    public ApiResponse generateScheduleForTrain(ScheduleDto scheduleDto){
+
+        //Date for searching schedule
+
+        //Parse String to DateTime
+        LocalDateTime dateTime = LocalDateTime.parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-DD-mm HH:mm"));
+
+        int year = dateTime.getYear();
+        int dayOfMonth = dateTime.getDayOfMonth();
+        int month = dateTime.getMonth().getValue();
+
+        String travelDate = year + "-" + month  + "-" + dayOfMonth; // "yyyy-DD-mm";
+
+
+        List<DirectionStationEntity> directionStationList = directionStationRepository.getDirectionStationEntitiesByDirectionIdOrderByStationOrder(scheduleDto.getDirectionId());
+        Optional<TrainEntity> optionalTrainEntityById = trainService.getOptionalTrainEntityById(scheduleDto.getTrainId());
+        //TODO use function to find directionStationList and train by id;
+
         if(optionalTrainEntityById.isEmpty())
             return BaseResponse.NOT_FOUND;
+        //TODO use exception
 
-        TrainEntity train = optionalTrainEntityById.get();
+        Long trainId = optionalTrainEntityById.get().getId();
 
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(startDateTime, formatter);
 
         for (DirectionStationEntity directionStation : directionStationList) {
-            ScheduleEntity schedule = new ScheduleEntity();
-            dateTime = dateTime.plusMinutes(stationStopMinutes);
 
+            ScheduleEntity schedule = new ScheduleEntity();
             schedule.setTrainId(trainId);
+
+            //setting date
             schedule.setArrivalTime(dateTime);
+            dateTime = dateTime.plusMinutes(scheduleDto.getStationStopMinute());
             schedule.setDepartureTime(dateTime);
+
             schedule.setStationId(directionStation.getStationId());
             schedule.setTrainStatus(true);
 

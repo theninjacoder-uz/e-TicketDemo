@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.service.wagon;
 
 import lombok.RequiredArgsConstructor;
+import uz.pdp.eticketdemo.exception.CustomNotFoundException;
 import uz.pdp.eticketdemo.model.dto.train.WagonDto;
 import uz.pdp.eticketdemo.model.entity.wagon.WagonEntity;
 import uz.pdp.eticketdemo.repository.wagon.WagonRepository;
@@ -77,5 +78,12 @@ public class WagonService extends BaseResponse implements BaseService<WagonDto> 
 
         SUCCESS.setData(wagonEntity);
         return SUCCESS;
+    }
+
+    private void checkWagon(Long id){
+        Optional<WagonEntity> optional = wagonRepository.findById(id);
+        if(optional.isEmpty()){
+            throw new CustomNotFoundException(id + " Wagon not found");
+        }
     }
 }

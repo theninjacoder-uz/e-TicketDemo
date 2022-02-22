@@ -2,6 +2,7 @@ package uz.pdp.eticketdemo.service.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import uz.pdp.eticketdemo.exception.CustomNotFoundException;
 import uz.pdp.eticketdemo.model.dto.user.PassengerDto;
 import uz.pdp.eticketdemo.model.entity.user.PassengerEntity;
 import uz.pdp.eticketdemo.repository.user.PassengerRepository;
@@ -88,4 +89,14 @@ public class PassengerService implements BaseService<PassengerDto> {
         passengerRepository.save(passenger);
         return SUCCESS;
     }
+
+    private void checkPassenger(Long id){
+        Optional<PassengerEntity> optional = passengerRepository.findById(id);
+        if(optional.isEmpty()){
+            throw new CustomNotFoundException(id + " Passenger not found");
+        }
+
+    }
+
+
 }
