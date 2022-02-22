@@ -65,4 +65,8 @@ public class AddressService extends BaseResponse implements BaseService<CountryD
         addressRepository.save(item);
         return null;
     }
+    public List<AddressEntity> getAddressesByRegion(Long regionId){
+        return addressRepository.getAddressEntitiesByRegionId(regionId);
+    }
+
 }
