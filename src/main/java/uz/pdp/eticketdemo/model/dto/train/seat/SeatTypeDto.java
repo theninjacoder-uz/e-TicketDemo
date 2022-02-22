@@ -8,5 +8,5 @@ import lombok.RequiredArgsConstructor;
 public class SeatTypeDto {
     private String name;
     private String description;
-
+    private Integer number;
 }

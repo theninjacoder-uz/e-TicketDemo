@@ -32,7 +32,7 @@ public class DirectionStationService extends BaseResponse implements BaseService
     }
 
     @Override
-    public ApiResponse getById(@PathVariable Long id) {
+    public ApiResponse getById(Long id) {
         Optional<DirectionStationEntity> byId = directionStationRepository.findById(id);
         if(byId.isPresent()){
             SUCCESS.setData(byId.get());
@@ -42,7 +42,7 @@ public class DirectionStationService extends BaseResponse implements BaseService
     }
 
     @Override
-    public ApiResponse delete(@PathVariable Long id) {
+    public ApiResponse delete(Long id) {
         boolean existsById = directionStationRepository.existsById(id);
         if(existsById){
             directionStationRepository.deleteById(id);
@@ -52,7 +52,7 @@ public class DirectionStationService extends BaseResponse implements BaseService
     }
 
     @Override
-    public ApiResponse edit(@PathVariable Long id, @RequestBody DirectionStationDto item) {
+    public ApiResponse edit(Long id, DirectionStationDto item) {
         Optional<DirectionStationEntity> byId = directionStationRepository.findById(id);
         if(byId.isPresent()){
 
