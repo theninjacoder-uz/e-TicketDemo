@@ -22,6 +22,7 @@ public class WagonEntity extends BaseEntity {
 
     private Integer availableSeatNumber;
 
-    @Enumerated(EnumType.STRING)
-    private WagonType wagonType;
+    private int wagonType;
+
+    private double price;
 }

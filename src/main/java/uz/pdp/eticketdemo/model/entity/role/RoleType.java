@@ -4,25 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public enum RoleType {
-    COMMON_USER("COMMON_USER"),
-    ADMIN("ADMIN"),
-    MANAGER("MANAGER");
+    COMMON_USER(1),
+    MANAGER(2),
+    ADMIN(4),
+    SUPER_ADMIN(8);
 
-    private final String name;
 
-    public static RoleType get(String type) {
-        if (type == null || type.isEmpty()) {
-            return null;
-        }
+    RoleType(int i) {
 
-        for (RoleType roleTypeEnum : RoleType.values()) {
-            if (roleTypeEnum.getName().equalsIgnoreCase(type)) {
-                return roleTypeEnum;
-            }
-        }
-        return null;
     }
 }
 

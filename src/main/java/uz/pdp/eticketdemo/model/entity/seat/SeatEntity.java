@@ -5,8 +5,10 @@ import lombok.Setter;
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 import uz.pdp.eticketdemo.model.entity.wagon.WagonEntity;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -17,15 +19,10 @@ public class SeatEntity extends BaseEntity {
     private Integer number;
 
     @ManyToOne
+//    @JoinColumn()
+    //TODO use @joinColumn
     private WagonEntity wagon;
 
-    @Enumerated(EnumType.STRING)
-    private SeatType seatType;
+    private Integer seatType;
 
-    @OneToMany(
-            mappedBy = "seat",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    private List<SeatStatusEntity> seatStatus;
 }

@@ -57,16 +57,16 @@ public class ScheduleService implements BaseService<ScheduleDto> {
     //Generate schedule by directionStationList, trainId and travel start dateTime
     public ApiResponse generateScheduleForTrain(ScheduleDto scheduleDto){
 
-        //Date for searching schedule
-
         //Parse String to DateTime
         LocalDateTime dateTime = LocalDateTime.parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-DD-mm HH:mm"));
 
-        int year = dateTime.getYear();
-        int dayOfMonth = dateTime.getDayOfMonth();
-        int month = dateTime.getMonth().getValue();
+//        int year = dateTime.getYear();
+//        int dayOfMonth = dateTime.getDayOfMonth();
+//        int month = dateTime.getMonth().getValue();
+//
+//        String travelDate = year + "-" + (month < 10 ? "0" + month : month)  + "-" + (dayOfMonth < 10 ? "0" + dayOfMonth : dayOfMonth); // "yyyy-DD-mm";
 
-        String travelDate = year + "-" + month  + "-" + dayOfMonth; // "yyyy-DD-mm";
+        LocalDateTime travelDate = LocalDateTime.parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-DD-mm HH:mm"));
 
 
         List<DirectionStationEntity> directionStationList = directionStationRepository.getDirectionStationEntitiesByDirectionIdOrderByStationOrder(scheduleDto.getDirectionId());
@@ -77,13 +77,14 @@ public class ScheduleService implements BaseService<ScheduleDto> {
             return BaseResponse.NOT_FOUND;
         //TODO use exception
 
-        Long trainId = optionalTrainEntityById.get().getId();
+        TrainEntity train = optionalTrainEntityById.get();
 
 
         for (DirectionStationEntity directionStation : directionStationList) {
 
             ScheduleEntity schedule = new ScheduleEntity();
-            schedule.setTrainId(trainId);
+            schedule.setTrainId(train.getId());
+            schedule.setTravelDate(travelDate);
 
             //setting date
             schedule.setArrivalTime(dateTime);
@@ -91,7 +92,6 @@ public class ScheduleService implements BaseService<ScheduleDto> {
             schedule.setDepartureTime(dateTime);
 
             schedule.setStationId(directionStation.getStationId());
-            schedule.setTrainStatus(true);
 
             Double distanceWithNextStation = directionStation.getDistanceWithNextStation();
             int minutes = (int) (distanceWithNextStation / train.getAverageSpeed() * 60);
