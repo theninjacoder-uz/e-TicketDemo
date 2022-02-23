@@ -119,6 +119,4 @@ public class ScheduleService implements BaseService<ScheduleDto> {
 
     }
 
-
-
 }
