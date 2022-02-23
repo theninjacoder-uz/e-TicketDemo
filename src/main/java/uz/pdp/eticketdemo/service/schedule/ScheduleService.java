@@ -4,18 +4,24 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.schedule.ScheduleDto;
+import uz.pdp.eticketdemo.model.dto.schedule.ScheduleSearchDto;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 import uz.pdp.eticketdemo.model.entity.schedule.ScheduleEntity;
+import uz.pdp.eticketdemo.model.entity.schedule.ScheduleSeatEntity;
+import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
 import uz.pdp.eticketdemo.repository.direction.DirectionStationRepository;
-import uz.pdp.eticketdemo.repository.station.ScheduleRepository;
+import uz.pdp.eticketdemo.repository.schedule.ScheduleRepository;
+import uz.pdp.eticketdemo.repository.schedule.ScheduleSeatRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
+import uz.pdp.eticketdemo.service.station.StationService;
 import uz.pdp.eticketdemo.service.train.TrainService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +30,10 @@ import java.util.Optional;
 public class ScheduleService implements BaseService<ScheduleDto> {
 
     public final ScheduleRepository scheduleRepository;
+    public final ScheduleSeatRepository scheduleSeatRepository;
     private final DirectionStationRepository directionStationRepository;
     private final TrainService trainService;
+    private final StationService stationService;
     private final ModelMapper modelMapper;
 
 
@@ -59,13 +67,6 @@ public class ScheduleService implements BaseService<ScheduleDto> {
 
         //Parse String to DateTime
         LocalDateTime dateTime = LocalDateTime.parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-DD-mm HH:mm"));
-
-//        int year = dateTime.getYear();
-//        int dayOfMonth = dateTime.getDayOfMonth();
-//        int month = dateTime.getMonth().getValue();
-//
-//        String travelDate = year + "-" + (month < 10 ? "0" + month : month)  + "-" + (dayOfMonth < 10 ? "0" + dayOfMonth : dayOfMonth); // "yyyy-DD-mm";
-
         LocalDateTime travelDate = LocalDateTime.parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-DD-mm HH:mm"));
 
 
@@ -79,6 +80,8 @@ public class ScheduleService implements BaseService<ScheduleDto> {
 
         TrainEntity train = optionalTrainEntityById.get();
 
+        // save schedule_seat entity
+        scheduleSeatRepository.save(new ScheduleSeatEntity(travelDate, train.getId()));
 
         for (DirectionStationEntity directionStation : directionStationList) {
 
@@ -104,4 +107,18 @@ public class ScheduleService implements BaseService<ScheduleDto> {
 
         return BaseResponse.SUCCESS;
     }
+
+
+    public ApiResponse findSchedule(ScheduleSearchDto searchDto){
+        //TODO get station order list from Madina's method
+        //List<someDto> dtoList =  StationService.getDirectionStation(searchDto.getFromId(), searchDto.getToId);
+
+        List<String> dtoList = new ArrayList<>();
+
+        return null;
+
+    }
+
+
+
 }

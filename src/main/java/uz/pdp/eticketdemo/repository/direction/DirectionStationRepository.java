@@ -20,6 +20,4 @@ public interface DirectionStationRepository extends JpaRepository<DirectionStati
     List<DirectionStationEntity> getDirectionStationEntitiesByTwoStations(Long fromStationId, Long toStationId);
 
 
-
-
 }

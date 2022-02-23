@@ -9,5 +9,4 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
 
     List<AddressEntity> getAddressEntitiesByRegionId(Long region_id);
 
-
 }
