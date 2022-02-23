@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
-import uz.pdp.eticketdemo.model.entity.order.OrderStatusEntity;
 import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 import uz.pdp.eticketdemo.model.entity.seat.SeatEntity;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
@@ -37,8 +36,8 @@ public class TicketEntity extends BaseEntity {
     private WagonEntity wagon;
     @OneToOne
     private SeatEntity seat;
-    @ManyToOne
-    private OrderStatusEntity orderStatus;
+
+    private Integer orderStatus;
     @NonNull
     private Double price;
 

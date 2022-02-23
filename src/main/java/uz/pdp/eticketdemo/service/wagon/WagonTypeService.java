@@ -3,7 +3,6 @@ package uz.pdp.eticketdemo.service.wagon;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.train.WagonTypeDto;
-import uz.pdp.eticketdemo.model.entity.wagon.WagonTypeEntity;
 import uz.pdp.eticketdemo.repository.wagon.WagonTypeRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;

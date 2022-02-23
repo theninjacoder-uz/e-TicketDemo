@@ -28,6 +28,8 @@ public class UserEntity extends BaseEntity {
     @Column(columnDefinition = "boolean default true")
     private Boolean userStatus;
 
-    @ManyToMany
-    private List<RoleEntity> role;
+    private int user_role;
+
+//    @ManyToMany
+//    private List<RoleEntity> role;
 }

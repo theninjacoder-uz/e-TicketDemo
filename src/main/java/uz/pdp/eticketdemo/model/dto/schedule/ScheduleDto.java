@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 public class ScheduleDto {
 
     @NotBlank
-    @Size(min = 32, max = 32)
     private long directionId;
 
     @NotBlank
