@@ -3,12 +3,15 @@ package uz.pdp.eticketdemo.service.station;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.station.StationDto;
+import uz.pdp.eticketdemo.model.entity.address.AddressEntity;
 import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 import uz.pdp.eticketdemo.repository.station.StationRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
+import uz.pdp.eticketdemo.service.address.AddressService;
 import uz.pdp.eticketdemo.service.base.BaseService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class StationService extends BaseResponse implements BaseService<StationDto> {
     private final StationRepository stationRepository;
+    private final AddressService addressService;
 
     @Override
     public ApiResponse getList() {
@@ -72,5 +76,18 @@ public class StationService extends BaseResponse implements BaseService<StationD
         stationRepository.save(station);
 
         return SUCCESS;
+    }
+
+    public List<StationEntity> getStationsByRegion(Long regionId){
+        List<StationEntity> stationList = stationRepository.findAll();
+        List<StationEntity> stationsByRegion = new ArrayList<>();
+        for (StationEntity station:stationList) {
+            for (AddressEntity address: addressService.getAddressesByRegion(regionId)) {
+                if (station.getAddress().getId().equals(address.getId())) {
+                    stationsByRegion.add(station);
+                }
+            }
+        }
+        return stationsByRegion;
     }
 }

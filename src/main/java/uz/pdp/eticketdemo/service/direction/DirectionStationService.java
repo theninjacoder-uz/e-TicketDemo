@@ -74,4 +74,8 @@ public class DirectionStationService extends BaseResponse implements BaseService
 
         return SUCCESS;
     }
+
+    public List<DirectionStationEntity> getDirectionsByTwoStationIds(Long fromStationId, Long toStationId){
+        return directionStationRepository.getDirectionStationEntitiesByTwoStations(fromStationId, toStationId);
+    }
 }

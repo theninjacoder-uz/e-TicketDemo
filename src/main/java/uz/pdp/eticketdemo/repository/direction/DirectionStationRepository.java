@@ -16,4 +16,10 @@ public interface DirectionStationRepository extends JpaRepository<DirectionStati
     @Query(value = "update direction_station set station_order = station_order + 1 where direction_id = ?1 and station_order >= ?2", nativeQuery = true)
     boolean updateStationOrder(long directionId, int stationOrder);
 
+    @Query(value = "select * from direction_station d inner join direction_station s on d.direction_id=s.direction_id where d.station_id = ?1 & s.station_id = ?2", nativeQuery = true)
+    List<DirectionStationEntity> getDirectionStationEntitiesByTwoStations(Long fromStationId, Long toStationId);
+
+
+
+
 }
