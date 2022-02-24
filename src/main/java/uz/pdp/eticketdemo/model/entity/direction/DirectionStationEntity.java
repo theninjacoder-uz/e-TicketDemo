@@ -1,11 +1,8 @@
 package uz.pdp.eticketdemo.model.entity.direction;
 
 import lombok.*;
-import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
-import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -16,7 +13,7 @@ import java.util.Date;
         name = "DirectionStationDtoMapping",
         classes = {
                 @ConstructorResult(
-                        targetClass = uz.pdp.eticketdemo.model.dto.direction.DirectionStationSearchDto.class,
+                        targetClass = DirectionStationSearchEntity.class,
                         columns = {
                                 @ColumnResult(name = "directionId", type = Long.class),
                                 @ColumnResult(name = "fromStationId", type = Long.class),

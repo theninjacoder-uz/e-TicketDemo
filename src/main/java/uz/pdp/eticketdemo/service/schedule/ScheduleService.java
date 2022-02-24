@@ -3,13 +3,12 @@ package uz.pdp.eticketdemo.service.schedule;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import uz.pdp.eticketdemo.model.dto.direction.DirectionStationSearchDto;
+import uz.pdp.eticketdemo.model.entity.direction.DirectionStationSearchEntity;
 import uz.pdp.eticketdemo.model.dto.schedule.ScheduleDto;
 import uz.pdp.eticketdemo.model.dto.schedule.ScheduleSearchDto;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 import uz.pdp.eticketdemo.model.entity.schedule.ScheduleEntity;
 import uz.pdp.eticketdemo.model.entity.schedule.ScheduleSeatEntity;
-import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
 import uz.pdp.eticketdemo.repository.direction.DirectionStationRepository;
 import uz.pdp.eticketdemo.repository.schedule.ScheduleRepository;
@@ -21,10 +20,8 @@ import uz.pdp.eticketdemo.service.station.StationService;
 import uz.pdp.eticketdemo.service.train.TrainService;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NamedNativeQuery;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,10 +115,10 @@ public class ScheduleService implements BaseService<ScheduleDto> {
         //List<someDto> dtoList =  StationService.getDirectionStation(searchDto.getFromId(), searchDto.getToId);
 
 
-        List<DirectionStationSearchDto> stationSearchDtoList = entityManager.createQuery(
+        List<DirectionStationSearchEntity> stationSearchDtoList = entityManager.createQuery(
                 "select fd.directionId, fd.stationOrder, td.stationOrder, fd.stationId, td.stationId from DirectionStationEntity fd inner join DirectionStationEntity td" +
                         " on fd.directionId = td.directionId where fd.stationOrder = td.stationOrder and fd.stationId = " + 1 + " and td.stationId = " + 2,
-                DirectionStationSearchDto.class
+                DirectionStationSearchEntity.class
                 ).getResultList();
 
 
