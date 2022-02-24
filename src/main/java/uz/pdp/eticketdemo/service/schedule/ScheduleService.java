@@ -3,6 +3,7 @@ package uz.pdp.eticketdemo.service.schedule;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import uz.pdp.eticketdemo.model.dto.direction.DirectionStationSearchDto;
 import uz.pdp.eticketdemo.model.dto.schedule.ScheduleDto;
 import uz.pdp.eticketdemo.model.dto.schedule.ScheduleSearchDto;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
@@ -19,6 +20,8 @@ import uz.pdp.eticketdemo.service.base.BaseService;
 import uz.pdp.eticketdemo.service.station.StationService;
 import uz.pdp.eticketdemo.service.train.TrainService;
 
+import javax.persistence.EntityManager;
+import javax.persistence.NamedNativeQuery;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -35,6 +38,7 @@ public class ScheduleService implements BaseService<ScheduleDto> {
     private final TrainService trainService;
     private final StationService stationService;
     private final ModelMapper modelMapper;
+    private final EntityManager entityManager;
 
 
     @Override
@@ -113,7 +117,14 @@ public class ScheduleService implements BaseService<ScheduleDto> {
         //TODO get station order list from Madina's method
         //List<someDto> dtoList =  StationService.getDirectionStation(searchDto.getFromId(), searchDto.getToId);
 
-        List<String> dtoList = new ArrayList<>();
+
+        List<DirectionStationSearchDto> stationSearchDtoList = entityManager.createQuery(
+                "select fd.directionId, fd.stationOrder, td.stationOrder, fd.stationId, td.stationId from DirectionStationEntity fd inner join DirectionStationEntity td" +
+                        " on fd.directionId = td.directionId where fd.stationOrder = td.stationOrder and fd.stationId = " + 1 + " and td.stationId = " + 2,
+                DirectionStationSearchDto.class
+                ).getResultList();
+
+
 
         return null;
 

@@ -12,6 +12,21 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "direction_station", uniqueConstraints = {@UniqueConstraint(columnNames = {"stationId", "directionId"})})
+@SqlResultSetMapping(
+        name = "DirectionStationDtoMapping",
+        classes = {
+                @ConstructorResult(
+                        targetClass = uz.pdp.eticketdemo.model.dto.direction.DirectionStationSearchDto.class,
+                        columns = {
+                                @ColumnResult(name = "directionId", type = Long.class),
+                                @ColumnResult(name = "fromStationId", type = Long.class),
+                                @ColumnResult(name = "toStationId", type = Long.class),
+                                @ColumnResult(name = "fromStationOrder", type = Integer.class),
+                                @ColumnResult(name = "toStationOrder", type = Integer.class)
+                        }
+                )
+        }
+)
 public class DirectionStationEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
