@@ -20,5 +20,6 @@ public class BookingEntity {
     private long directionId;
     private LocalDateTime travelDate;
 
+
     private long seatOccupationInterval;
 }

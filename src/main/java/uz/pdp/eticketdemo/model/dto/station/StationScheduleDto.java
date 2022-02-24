@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class StationScheduleDto {
 
     private long trainId;
+    private long availableSeatNumbers;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
 

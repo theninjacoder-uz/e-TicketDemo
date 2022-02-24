@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.service.train;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.train.TrainDto;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
 import uz.pdp.eticketdemo.repository.train.TrainRepository;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Service
 public class TrainService extends BaseResponse implements BaseService<TrainDto> {
 
     private final TrainRepository trainRepository;
@@ -79,8 +81,7 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
         return SUCCESS;
     }
 
-    public int getTotalCapacity(long trainId, int wagonType){
-        int getTotalSeatNumbers = trainRepository.getTotalSeatNumbers(trainId, wagonType);
-        return 0;
+    public int getTotalCapacityByWagonType(long trainId, int wagonType){
+        return trainRepository.getTotalSeatNumbers(trainId, wagonType);
     }
 }
