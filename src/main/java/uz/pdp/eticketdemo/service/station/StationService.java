@@ -84,6 +84,7 @@ public class StationService extends BaseResponse implements BaseService<StationD
         for (StationEntity station:stationList) {
             for (AddressEntity address: addressService.getAddressesByRegion(regionId)) {
                 if (station.getAddress().getId().equals(address.getId())) {
+//                    assert false;
                     stationsByRegion.add(station);
                 }
             }
