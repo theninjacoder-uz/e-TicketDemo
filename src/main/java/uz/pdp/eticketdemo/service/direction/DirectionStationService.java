@@ -3,6 +3,7 @@ package uz.pdp.eticketdemo.service.direction;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import uz.pdp.eticketdemo.model.dto.direction.DirectionBetweenStationsDto;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Service
 public class DirectionStationService extends BaseResponse implements BaseService<DirectionStationDto> {
 
     @Autowired

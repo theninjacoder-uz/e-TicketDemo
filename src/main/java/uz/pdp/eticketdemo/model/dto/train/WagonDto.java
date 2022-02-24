@@ -14,5 +14,5 @@ public class WagonDto {
 
     private TrainEntity trainEntity;
 
-    private WagonType wagonType;
+    private Integer wagonType;
 }

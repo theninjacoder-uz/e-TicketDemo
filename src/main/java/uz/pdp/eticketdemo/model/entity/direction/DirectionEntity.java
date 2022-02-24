@@ -23,8 +23,7 @@ public class DirectionEntity extends BaseEntity {
 
     @ManyToMany(
             fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "directionList"
+            cascade = CascadeType.ALL
     )
     private List<TrainEntity> trainList;
 }

@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.service.address;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import uz.pdp.eticketdemo.model.dto.address.CountryDto;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Service
 public class AddressService extends BaseResponse implements BaseService<CountryDto.AddressDto> {
 
     private final AddressRepository addressRepository;

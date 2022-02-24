@@ -21,9 +21,9 @@ public class TrainEntity extends BaseEntity {
     private String model;
 
     @ManyToMany(
+            mappedBy = "trainList",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL,
-            mappedBy = "trainList"
+            cascade = CascadeType.ALL
     )
     private List<DirectionEntity> directionList;
 

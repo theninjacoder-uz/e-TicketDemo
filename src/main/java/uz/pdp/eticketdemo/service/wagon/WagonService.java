@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.service.wagon;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.exception.CustomNotFoundException;
 import uz.pdp.eticketdemo.model.dto.train.WagonDto;
 import uz.pdp.eticketdemo.model.entity.wagon.WagonEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Service
 public class WagonService extends BaseResponse implements BaseService<WagonDto> {
 
     private final WagonRepository wagonRepository;
