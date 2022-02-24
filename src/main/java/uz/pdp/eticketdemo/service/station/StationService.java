@@ -79,16 +79,16 @@ public class StationService extends BaseResponse implements BaseService<StationD
     }
 
     public List<StationEntity> getStationsByRegion(Long regionId){
-        List<StationEntity> stationList = stationRepository.findAll();
-        List<StationEntity> stationsByRegion = new ArrayList<>();
-        for (StationEntity station:stationList) {
-            for (AddressEntity address: addressService.getAddressesByRegion(regionId)) {
-                if (station.getAddress().getId().equals(address.getId())) {
-//                    assert false;
-                    stationsByRegion.add(station);
-                }
-            }
-        }
-        return stationsByRegion;
+//        List<StationEntity> stationList = stationRepository.findAll();
+//        List<StationEntity> stationsByRegion = new ArrayList<>();
+//        for (StationEntity station:stationList) {
+//            for (AddressEntity address: addressService.getAddressesByRegion(regionId)) {
+//                if (station.getAddress().getId().equals(address.getId())) {
+////                    assert false;
+//                    stationsByRegion.add(station);
+//                }
+//            }
+//        }
+        return stationRepository.getStationsByRegionId(regionId);
     }
 }

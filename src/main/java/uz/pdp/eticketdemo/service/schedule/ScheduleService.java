@@ -3,19 +3,20 @@ package uz.pdp.eticketdemo.service.schedule;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import uz.pdp.eticketdemo.model.entity.direction.DirectionStationSearchEntity;
+import uz.pdp.eticketdemo.model.dto.direction.DirectionBetweenStationsDto;
 import uz.pdp.eticketdemo.model.dto.schedule.ScheduleDto;
 import uz.pdp.eticketdemo.model.dto.schedule.ScheduleSearchDto;
+import uz.pdp.eticketdemo.model.dto.station.StationScheduleDto;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 import uz.pdp.eticketdemo.model.entity.schedule.ScheduleEntity;
 import uz.pdp.eticketdemo.model.entity.schedule.ScheduleSeatEntity;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
 import uz.pdp.eticketdemo.repository.direction.DirectionStationRepository;
 import uz.pdp.eticketdemo.repository.schedule.ScheduleRepository;
-import uz.pdp.eticketdemo.repository.schedule.ScheduleSeatRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
+import uz.pdp.eticketdemo.service.direction.DirectionStationService;
 import uz.pdp.eticketdemo.service.station.StationService;
 import uz.pdp.eticketdemo.service.train.TrainService;
 
@@ -30,8 +31,9 @@ import java.util.Optional;
 public class ScheduleService implements BaseService<ScheduleDto> {
 
     public final ScheduleRepository scheduleRepository;
-    public final ScheduleSeatRepository scheduleSeatRepository;
+//    public final ScheduleSeatRepository scheduleSeatRepository;
     private final DirectionStationRepository directionStationRepository;
+    private final DirectionStationService directionStationService;
     private final TrainService trainService;
     private final StationService stationService;
     private final ModelMapper modelMapper;
@@ -82,7 +84,7 @@ public class ScheduleService implements BaseService<ScheduleDto> {
         TrainEntity train = optionalTrainEntityById.get();
 
         // save schedule_seat entity
-        scheduleSeatRepository.save(new ScheduleSeatEntity(travelDate, train.getId()));
+//        scheduleSeatRepository.save(new ScheduleSeatEntity(travelDate, train.getId()));
 
         for (DirectionStationEntity directionStation : directionStationList) {
 
@@ -115,12 +117,25 @@ public class ScheduleService implements BaseService<ScheduleDto> {
         //List<someDto> dtoList =  StationService.getDirectionStation(searchDto.getFromId(), searchDto.getToId);
 
 
-        List<DirectionStationSearchEntity> stationSearchDtoList = entityManager.createQuery(
-                "select fd.directionId, fd.stationOrder, td.stationOrder, fd.stationId, td.stationId from DirectionStationEntity fd inner join DirectionStationEntity td" +
-                        " on fd.directionId = td.directionId where fd.stationOrder = td.stationOrder and fd.stationId = " + 1 + " and td.stationId = " + 2,
-                DirectionStationSearchEntity.class
-                ).getResultList();
+//        List<DirectionStationSearchEntity> stationSearchDtoList = entityManager.createQuery(
+//                "select fd.directionId, fd.stationOrder, td.stationOrder, fd.stationId, td.stationId from DirectionStationEntity fd inner join DirectionStationEntity td" +
+//                        " on fd.directionId = td.directionId where fd.stationOrder = td.stationOrder and fd.stationId = " + 1 + " and td.stationId = " + 2,
+//                DirectionStationSearchEntity.class
+//                ).getResultList();
 
+        List<DirectionBetweenStationsDto> directionsByTwoStations = directionStationService.getDirectionsByTwoStations(searchDto.getFromRegionId(), searchDto.getToRegionId());
+        long seatStatus = 1 << 30;
+        //TODO increase number of stations if you needed
+
+        for (DirectionBetweenStationsDto twoStation : directionsByTwoStations) {
+//            Integer numberOfStations = twoStation.getNumberOfStations();
+
+            Integer fromStationOrder = twoStation.getFromStationOrder();
+            Integer toStationOrder = twoStation.getToStationOrder();
+
+            List<StationScheduleDto> stationSchedules = scheduleRepository.getStationsScheduleByDate(searchDto.getLocalDateTime(), twoStation.getFromStationId(), twoStation.getToStationId());
+            //TODO check available seats by train_id and wagon_type
+        }
 
 
         return null;

@@ -14,18 +14,18 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TrainService extends BaseResponse implements BaseService<TrainDto> {
 
-    private final TrainRepository repository;
+    private final TrainRepository trainRepository;
 
     @Override
     public ApiResponse getList() {
-        List<TrainEntity> allTrains = repository.findAll();
+        List<TrainEntity> allTrains = trainRepository.findAll();
         SUCCESS.setData(allTrains);
         return SUCCESS;
     }
 
     @Override
     public ApiResponse getById(Long id) {
-        Optional<TrainEntity> byId = repository.findById(id);
+        Optional<TrainEntity> byId = trainRepository.findById(id);
         if(byId.isPresent()){
             SUCCESS.setData(byId.get());
             return SUCCESS;
@@ -34,15 +34,15 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
     }
 
     public Optional<TrainEntity> getOptionalTrainEntityById(Long id) {
-        Optional<TrainEntity> byId = repository.findById(id);
+        Optional<TrainEntity> byId = trainRepository.findById(id);
         return byId;
     }
 
     @Override
     public ApiResponse delete(Long id) {
-        boolean existsById = repository.existsById(id);
+        boolean existsById = trainRepository.existsById(id);
         if(existsById){
-            repository.deleteById(id);
+            trainRepository.deleteById(id);
             return SUCCESS;
         }
         return NOT_FOUND;
@@ -50,7 +50,7 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
 
     @Override
     public ApiResponse edit(Long id, TrainDto item) {
-        Optional<TrainEntity> findById = repository.findById(id);
+        Optional<TrainEntity> findById = trainRepository.findById(id);
         if(findById.isPresent()){
             TrainEntity trainEntity = findById.get();
             trainEntity.setName(item.getName());
@@ -59,7 +59,7 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
             trainEntity.setAvailableSeatNumber(item.getAvailableSeatNumber());
             trainEntity.setAverageSpeed(item.getAverageSpeed());
 
-            repository.save(trainEntity);
+            trainRepository.save(trainEntity);
             SUCCESS.setData(trainEntity);
             return SUCCESS;
         }
@@ -74,8 +74,13 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
         trainEntity.setCapacity(item.getCapacity());
         trainEntity.setAvailableSeatNumber(item.getAvailableSeatNumber());
         trainEntity.setAverageSpeed(item.getAverageSpeed());
-        repository.save(trainEntity);
+        trainRepository.save(trainEntity);
         SUCCESS.setData(trainEntity);
         return SUCCESS;
+    }
+
+    public int getTotalCapacity(long trainId, int wagonType){
+        int getTotalSeatNumbers = trainRepository.getTotalSeatNumbers(trainId, wagonType);
+        return 0;
     }
 }

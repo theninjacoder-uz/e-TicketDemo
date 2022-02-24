@@ -18,7 +18,7 @@ public class BookingEntity {
     private long wagonId;
     private long seatId;
     private long directionId;
-    private LocalDateTime localDateTime;
+    private LocalDateTime travelDate;
 
     private long seatOccupationInterval;
 }

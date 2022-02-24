@@ -39,7 +39,7 @@ public class DirectionStationService extends BaseResponse implements BaseService
     @Override
     public ApiResponse getById(Long id) {
         Optional<DirectionStationEntity> byId = directionStationRepository.findById(id);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
             SUCCESS.setData(byId.get());
             return SUCCESS;
         }
@@ -49,7 +49,7 @@ public class DirectionStationService extends BaseResponse implements BaseService
     @Override
     public ApiResponse delete(Long id) {
         boolean existsById = directionStationRepository.existsById(id);
-        if(existsById){
+        if (existsById) {
             directionStationRepository.deleteById(id);
             return SUCCESS;
         }
@@ -59,7 +59,7 @@ public class DirectionStationService extends BaseResponse implements BaseService
     @Override
     public ApiResponse edit(Long id, DirectionStationDto item) {
         Optional<DirectionStationEntity> byId = directionStationRepository.findById(id);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
 
             DirectionStationEntity entity = modelMapper.map(item, DirectionStationEntity.class);
             directionStationRepository.save(entity);
@@ -81,38 +81,44 @@ public class DirectionStationService extends BaseResponse implements BaseService
     }
 
 
-
 //    public List<DirectionStationEntity> getDirectionsByTwoStationIds(Long fromStationId, Long toStationId){
 //        return directionStationRepository.getDirectionStationEntitiesByTwoStations(fromStationId, toStationId);
 //    }
 
-    public List<DirectionBetweenStationsDto> getDirectionsByTwoStations(Long fromRegionId, Long toRegionId){
-        List<DirectionBetweenStationsDto> directionBetweenStationsDtos = new ArrayList<>();
-        List<StationEntity> fromStations=stationService.getStationsByRegion(fromRegionId);
-        List<StationEntity> toStations=stationService.getStationsByRegion(toRegionId);
+    public List<DirectionBetweenStationsDto> getDirectionsByTwoStations(Long fromRegionId, Long toRegionId) {
+//        List<DirectionBetweenStationsDto> directionBetweenStationsDtos = new ArrayList<>();
+        List<DirectionBetweenStationsDto> directionStations = new ArrayList<>();
+        List<StationEntity> fromStations = stationService.getStationsByRegion(fromRegionId);
+        List<StationEntity> toStations = stationService.getStationsByRegion(toRegionId);
 
-        for (StationEntity sFrom:fromStations) {
-            for (StationEntity sTo:toStations) {
-                List<DirectionStationEntity> directionStations = new ArrayList<>(directionStationRepository
-                        .getDirectionStationEntitiesByTwoStations(sFrom.getId(), sTo.getId()));
+        for (StationEntity sFrom : fromStations) {
+            for (StationEntity sTo : toStations) {
+                 directionStations = directionStationRepository
+                        .getDirectionStationEntitiesByTwoStations(sFrom.getId(), sTo.getId());
 
-                for (DirectionStationEntity d: directionStations) {
-                    DirectionBetweenStationsDto dto=new DirectionBetweenStationsDto();
-                    dto.setDirectionId(d.getDirectionId());
-                    dto.setFromStationId(sFrom.getId());
-                    dto.setFromStationOrder(directionStationRepository
-                            .getDirectionStationEntityByStationIdAndDirectionId(sFrom.getId(), d.getDirectionId()).getStationOrder());
-                    dto.setToStationId(sTo.getId());
-                    dto.setToStationOrder(directionStationRepository
-                            .getDirectionStationEntityByStationIdAndDirectionId(sTo.getId(), d.getDirectionId()).getStationOrder());
-                    dto.setNumberOfStations(directionStationRepository.getNumberOfStationForDirection(d.getDirectionId()));
-
-                    directionBetweenStationsDtos.add(dto);
+                for (DirectionBetweenStationsDto directionStation: directionStations) {
+                    Integer numberOfStations = directionStationRepository.getNumberOfStationForDirection(directionStation.getDirectionId());
+                    directionStation.setNumberOfStations(numberOfStations);
                 }
+
+
+//                for (DirectionStationEntity d : directionStations) {
+//                    DirectionBetweenStationsDto dto = new DirectionBetweenStationsDto();
+//                    dto.setDirectionId(d.getDirectionId());
+//                    dto.setFromStationId(sFrom.getId());
+//                    dto.setFromStationOrder(directionStationRepository
+//                            .getDirectionStationEntityByStationIdAndDirectionId(sFrom.getId(), d.getDirectionId()).getStationOrder());
+//                    dto.setToStationId(sTo.getId());
+//                    dto.setToStationOrder(directionStationRepository
+//                            .getDirectionStationEntityByStationIdAndDirectionId(sTo.getId(), d.getDirectionId()).getStationOrder());
+//                    dto.setNumberOfStations(directionStationRepository.getNumberOfStationForDirection(d.getDirectionId()));
+//
+//                    directionBetweenStationsDtos.add(dto);
+//                }
 
             }
         }
-        return directionBetweenStationsDtos;
+        return directionStations;
     }
 
 }
