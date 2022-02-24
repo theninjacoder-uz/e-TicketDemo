@@ -2,7 +2,6 @@ package uz.pdp.eticketdemo.model.entity.user;
 
 import lombok.*;
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
-import uz.pdp.eticketdemo.model.entity.role.RoleEntity;
 
 import javax.persistence.*;
 import java.util.List;

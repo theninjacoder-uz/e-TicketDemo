@@ -22,4 +22,9 @@ public interface DirectionStationRepository extends JpaRepository<DirectionStati
 
     @Query(value = "select * from direction_station d inner join direction_station s on d.direction_id=s.direction_id where d.station_order > s.station_order and d.station_id = ?1 & s.station_id = ?2", nativeQuery = true)
     List<DirectionStationEntity> getDirectionStationEntitiesByTwoStations(Long fromStationId, Long toStationId);
+
+    DirectionStationEntity getDirectionStationEntityByStationIdAndDirectionId(Long stationId, Long DirectionId);
+
+    @Query(value = "select count (station_id) from direction_station where direction_id = ?1", nativeQuery = true)
+    Integer getNumberOfStationForDirection(Long directionId);
 }

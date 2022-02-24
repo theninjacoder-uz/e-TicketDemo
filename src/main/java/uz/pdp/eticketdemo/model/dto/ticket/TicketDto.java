@@ -19,6 +19,5 @@ public class TicketDto {
     private Date date;
     private WagonEntity wagon;
     private SeatEntity seat;
-    private OrderStatusEntity orderStatus;
 
 }

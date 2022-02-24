@@ -2,7 +2,6 @@ package uz.pdp.eticketdemo.service.ticket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.ticket.OrderStatusDto;
-import uz.pdp.eticketdemo.repository.ticket.OrderStatusRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
 
