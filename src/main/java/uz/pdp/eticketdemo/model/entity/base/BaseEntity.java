@@ -19,7 +19,7 @@ public abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @ColumnDefault("true")
+    @ColumnDefault("boolean default true")
     protected boolean isActive;
 
     @CreationTimestamp
