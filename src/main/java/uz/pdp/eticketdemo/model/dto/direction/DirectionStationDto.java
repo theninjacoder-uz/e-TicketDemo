@@ -10,6 +10,5 @@ public class DirectionStationDto{
     private long stationId;
     private long directionId;
     private int stationOrder;
-    private Double distanceWithPreviousStation;
     private Double distanceWithNextStation;
 }
