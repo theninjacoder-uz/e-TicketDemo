@@ -117,17 +117,14 @@ public class ScheduleService implements BaseService<ScheduleDto> {
         //TODO get station order list from Madina's method
         //List<someDto> dtoList =  StationService.getDirectionStation(searchDto.getFromId(), searchDto.getToId);
 
-        @NamedNativeQuery(name="findDirectionStations",
-                query = "select fd.direction_id, fd.station_order, sd.station_order, fd.station_id, sd.station_id from direction_station fd inner join direction_station " +
-                        "sd on fd.direction_id = sd.direction_id where fd.station_order = sd.station_order and d.station_id = ?1 & s.station_id = ?2", resultSetMapping = "DirectionStationDtoMapping",
-
-        );
 
         List<DirectionStationSearchDto> stationSearchDtoList = entityManager.createQuery(
-                "select fd.direction_id, fd.station_order, sd.station_order, fd.station_id, sd.station_id from direction_station fd inner join direction_station " +
-                        "sd on fd.direction_id = sd.direction_id where fd.station_order = sd.station_order and fd.station_id = " + searchDto.getFromRegionId() " and sd.station_id = ?2"
+                "select fd.directionId, fd.stationOrder, td.stationOrder, fd.stationId, td.stationId from DirectionStationEntity fd inner join DirectionStationEntity td" +
+                        " on fd.directionId = td.directionId where fd.stationOrder = td.stationOrder and fd.stationId = " + 1 + " and td.stationId = " + 2,
+                DirectionStationSearchDto.class
+                ).getResultList();
 
-                )
+
 
         return null;
 
