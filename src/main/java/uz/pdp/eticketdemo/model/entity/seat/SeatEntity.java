@@ -18,9 +18,9 @@ public class SeatEntity extends BaseEntity {
 
     private Integer number;
 
-    @ManyToOne
 //    @JoinColumn()
     //TODO use @joinColumn
+    @ManyToOne
     private WagonEntity wagon;
 
     private Integer seatType;

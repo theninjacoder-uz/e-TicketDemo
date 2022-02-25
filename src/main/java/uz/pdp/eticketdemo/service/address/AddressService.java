@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import uz.pdp.eticketdemo.model.dto.address.AddressDto;
 import uz.pdp.eticketdemo.model.dto.address.CountryDto;
 import uz.pdp.eticketdemo.model.entity.address.AddressEntity;
 import uz.pdp.eticketdemo.repository.address.AddressRepository;
@@ -16,7 +17,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class AddressService extends BaseResponse implements BaseService<CountryDto.AddressDto> {
+public class AddressService extends BaseResponse implements BaseService<AddressDto> {
 
     private final AddressRepository addressRepository;
 
@@ -50,25 +51,35 @@ public class AddressService extends BaseResponse implements BaseService<CountryD
     }
 
     @Override
-    public ApiResponse edit(@PathVariable Long id, @RequestBody CountryDto.AddressDto addressDto) {
-        Optional<AddressEntity> findById = addressRepository.findById(id);
-          if(findById.isPresent()){
-              AddressEntity addressEntity = findById.get();
-              addressEntity.setStreetName(addressDto.getStreetName());
-              addressEntity.setHomeNumber(addressDto.getHomeNumber());
-              addressRepository.save(addressEntity);
-              return SUCCESS;
-          }
-        return NOT_FOUND;
+    public ApiResponse edit(Long id, AddressDto item) {
+        return null;
     }
 
     @Override
-    public ApiResponse add(CountryDto.AddressDto item) {
-        addressRepository.save(item);
+    public ApiResponse add(AddressDto item) {
         return null;
     }
-    public List<AddressEntity> getAddressesByRegion(Long regionId){
-        return addressRepository.getAddressEntitiesByRegionId(regionId);
-    }
+
+//    @Override
+//    public ApiResponse edit(@PathVariable Long id, @RequestBody CountryDto.AddressDto addressDto) {
+//        Optional<AddressEntity> findById = addressRepository.findById(id);
+//          if(findById.isPresent()){
+//              AddressEntity addressEntity = findById.get();
+//              addressEntity.setStreetName(addressDto.getStreetName());
+//              addressEntity.setHomeNumber(addressDto.getHomeNumber());
+//              addressRepository.save(addressEntity);
+//              return SUCCESS;
+//          }
+//        return NOT_FOUND;
+//    }
+//
+//    @Override
+//    public ApiResponse add(AddressDto item) {
+//        addressRepository.save(item);
+//        return null;
+//    }
+//    public List<AddressEntity> getAddressesByRegion(Long regionId){
+//        return addressRepository.getAddressEntitiesByRegionId(regionId);
+//    }
 
 }

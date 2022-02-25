@@ -13,9 +13,11 @@ import java.util.Date;
 @Entity(name = "region")
 public class RegionEntity extends BaseEntity {
 
-    @Column(nullable = false)
-    private String regionName;
+    @Column(nullable = false, unique = true)
+    private String region;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
     private CountryEntity country;
 }

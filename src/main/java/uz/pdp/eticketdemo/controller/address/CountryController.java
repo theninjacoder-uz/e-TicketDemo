@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.controller;
+package uz.pdp.eticketdemo.controller.address;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +30,10 @@ public class CountryController {
     @PostMapping("/edit")
     public ApiResponse edit(@RequestParam(name = "id") Long id, @RequestBody CountryDto countryDto){
         return service.edit(id, countryDto);
+    }
+
+    @DeleteMapping("/delete")
+    public ApiResponse delete(@RequestParam(name = "id") Long id){
+        return service.delete(id);
     }
 }

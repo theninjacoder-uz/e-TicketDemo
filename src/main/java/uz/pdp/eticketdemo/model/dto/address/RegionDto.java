@@ -5,6 +5,6 @@ import uz.pdp.eticketdemo.model.entity.address.CountryEntity;
 
 @Data
 public class RegionDto {
-    private String regionName;
+    private String region;
     private CountryEntity country;
 }

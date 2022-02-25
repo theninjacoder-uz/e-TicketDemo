@@ -24,10 +24,8 @@ import java.util.Optional;
 @Service
 public class DirectionStationService extends BaseResponse implements BaseService<DirectionStationDto> {
 
-    @Autowired
     private final DirectionStationRepository directionStationRepository;
     private final StationService stationService;
-    @Autowired
     private ModelMapper modelMapper;
 
     @Override

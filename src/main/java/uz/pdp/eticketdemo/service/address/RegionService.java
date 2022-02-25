@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.service.address;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.address.RegionDto;
 import uz.pdp.eticketdemo.model.entity.address.RegionEntity;
@@ -16,6 +17,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RegionService extends BaseResponse implements BaseService<RegionDto> {
     private final RegionRepository regionRepository;
+    private final ModelMapper modelMapper;
+
     @Override
     public ApiResponse getList() {
         List<RegionEntity> list = regionRepository.findAll();
@@ -50,10 +53,11 @@ public class RegionService extends BaseResponse implements BaseService<RegionDto
         Optional<RegionEntity> optional = regionRepository.findById(id);
 
         if(optional.isPresent()){
-            RegionEntity region = optional.get();
-
-            region.setRegionName(item.getRegionName());
-            region.setCountry(item.getCountry());
+//            RegionEntity region = optional.get();
+//
+//            region.setRegionName(item.getRegion());
+//            region.setCountry(item.getCountry());
+            RegionEntity region = modelMapper.map(item, RegionEntity.class);
 
             regionRepository.save(region);
             SUCCESS.setData(region);
@@ -65,11 +69,12 @@ public class RegionService extends BaseResponse implements BaseService<RegionDto
 
     @Override
     public ApiResponse add(RegionDto item) {
-        RegionEntity region=new RegionEntity();
+//        RegionEntity region=new RegionEntity();
+//
+//        region.setRegionName(item.getRegion());
+//        region.setCountry(item.getCountry());
 
-        region.setRegionName(item.getRegionName());
-        region.setCountry(item.getCountry());
-
+        RegionEntity region = modelMapper.map(item, RegionEntity.class);
         regionRepository.save(region);
 
         return SUCCESS;

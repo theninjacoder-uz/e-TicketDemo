@@ -21,9 +21,12 @@ public class DirectionEntity extends BaseEntity {
     @Column
     private String name;
 
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+    @ManyToMany
+    @Column(name = "train")
+    @JoinTable(
+            name = "direction_train",
+            inverseJoinColumns = {@JoinColumn(name = "direction_id")},
+            joinColumns = {@JoinColumn(name = "train_id")}
     )
     private List<TrainEntity> trainList;
 }

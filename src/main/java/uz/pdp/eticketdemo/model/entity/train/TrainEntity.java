@@ -20,10 +20,11 @@ public class TrainEntity extends BaseEntity {
 
     private String model;
 
-    @ManyToMany(
-            mappedBy = "trainList",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
+    @ManyToMany
+    @JoinTable(
+            name = "direction_train",
+            joinColumns = {@JoinColumn(name = "direction_id")},
+            inverseJoinColumns = {@JoinColumn(name = "train_id")}
     )
     private List<DirectionEntity> directionList;
 

@@ -13,16 +13,18 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
 @MappedSuperclass
 public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @ColumnDefault("boolean default true")
+    @ColumnDefault("true")
     protected boolean isActive;
 
     @CreationTimestamp
+    @Column(updatable = false)
     protected LocalDateTime createdDate;
 
     @UpdateTimestamp
@@ -32,5 +34,6 @@ public abstract class BaseEntity {
     protected String updatedBy;
 
     @CreatedBy
+    @Column(updatable = false)
     protected String createdBy;
 }

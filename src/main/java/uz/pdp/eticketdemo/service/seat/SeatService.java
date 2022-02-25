@@ -1,13 +1,12 @@
 package uz.pdp.eticketdemo.service.seat;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.seat.SeatTypeDto;
 import uz.pdp.eticketdemo.model.entity.seat.SeatEntity;
-import uz.pdp.eticketdemo.model.entity.seat.SeatStatusEntity;
 import uz.pdp.eticketdemo.model.entity.seat.SeatType;
 import uz.pdp.eticketdemo.model.entity.wagon.WagonEntity;
 import uz.pdp.eticketdemo.repository.seat.SeatRepository;
-import uz.pdp.eticketdemo.repository.seat.SeatStatusRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
@@ -17,10 +16,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Service
 public class SeatService extends BaseResponse implements BaseService<SeatTypeDto> {
 
     private final SeatRepository seatRepository;
-    private final SeatStatusRepository seatStatusRepository;
+
     @Override
     public ApiResponse getList() {
         List<SeatEntity> allSeats = seatRepository.findAll();
@@ -74,26 +74,26 @@ public class SeatService extends BaseResponse implements BaseService<SeatTypeDto
     public boolean generateSeats(WagonEntity wagon, int numberOfSeats) {
 
         List<SeatEntity> seatEntityList = new ArrayList<>();
-        List<SeatStatusEntity> statusEntities = new ArrayList<>();
+//        List<SeatStatusEntity> statusEntities = new ArrayList<>();
 
         int n = 1;
 
         while(n < numberOfSeats){
             SeatEntity seat = new SeatEntity();
-            seat.setSeatType(SeatType.SITTING);
+            seat.setSeatType(SeatType.SITTING.ordinal());
             seat.setNumber(n);
             seat.setWagon(wagon);
 
-            SeatStatusEntity seatStatus = new SeatStatusEntity();
-            seatStatus.setSeat(seat);
-
-            seatEntityList.add(seat);
-            statusEntities.add(seatStatus);
+//            SeatStatusEntity seatStatus = new SeatStatusEntity();
+//            seatStatus.setSeat(seat);
+//
+//            seatEntityList.add(seat);
+//            statusEntities.add(seatStatus);
             n++;
         }
 
         seatRepository.saveAll(seatEntityList);
-        seatStatusRepository.saveAll(statusEntities);
+//        seatStatusRepository.saveAll(statusEntities);
 
         return true;
     }//TODO add seat considering seatType
