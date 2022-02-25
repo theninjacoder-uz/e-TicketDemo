@@ -30,6 +30,8 @@ public class TrainEntity extends BaseEntity {
 
     private Integer capacity;
 
+    private Integer trainType;
+
     private Integer availableSeatNumber;
 
     private double averageSpeed;

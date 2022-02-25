@@ -3,8 +3,10 @@ package uz.pdp.eticketdemo.service.station;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import uz.pdp.eticketdemo.model.dto.direction.DirectionDto;
 import uz.pdp.eticketdemo.model.dto.station.StationDto;
 import uz.pdp.eticketdemo.model.entity.address.AddressEntity;
+import uz.pdp.eticketdemo.model.entity.direction.DirectionEntity;
 import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 import uz.pdp.eticketdemo.repository.station.StationRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
@@ -92,5 +94,9 @@ public class StationService extends BaseResponse implements BaseService<StationD
 //            }
 //        }
         return stationRepository.getStationsByRegionId(regionId);
+    }
+
+    public List<DirectionEntity> getDIrectionByStationId(Long stationId){
+        return stationRepository.getDirectionByStationId(stationId);
     }
 }

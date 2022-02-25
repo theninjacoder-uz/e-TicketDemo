@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import uz.pdp.eticketdemo.model.entity.address.AddressEntity;
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
+import uz.pdp.eticketdemo.model.entity.direction.DirectionEntity;
 
 import javax.persistence.*;
 
@@ -23,4 +24,7 @@ public class StationEntity extends BaseEntity {
             cascade = CascadeType.ALL
     )
     private AddressEntity address;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private DirectionEntity direction;
 }

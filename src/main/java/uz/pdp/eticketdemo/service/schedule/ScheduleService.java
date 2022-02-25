@@ -23,7 +23,9 @@ import uz.pdp.eticketdemo.service.train.TrainService;
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -146,9 +148,9 @@ public class ScheduleService implements BaseService<ScheduleDto> {
             for (StationScheduleDto stationSchedule : stationSchedules) {
                 long trainId = stationSchedule.getTrainId();
                 long occupiedSeatNumbers = bookingService.getOccupiedSeatNumbers(fromStationOrder, toStationOrder, trainId, searchDto.getLocalDateTime());
-                int capacityBusinessClass = trainService.getTotalCapacityByWagonType(trainId, 1);
-                int capacityFirstClass = trainService.getTotalCapacityByWagonType(trainId, 2);
-                int capacityEconomyClass = trainService.getTotalCapacityByWagonType(trainId, 4);
+                int capacityBusinessClass = trainService.getTotalCapacity(trainId, 1);
+                int capacityFirstClass = trainService.getTotalCapacity(trainId, 2);
+                int capacityEconomyClass = trainService.getTotalCapacity(trainId, 4);
 
                 long availableSeats = capacityEconomyClass + capacityBusinessClass+capacityFirstClass - occupiedSeatNumbers;
 

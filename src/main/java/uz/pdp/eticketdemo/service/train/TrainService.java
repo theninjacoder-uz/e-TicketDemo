@@ -81,7 +81,10 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
         return SUCCESS;
     }
 
-    public int getTotalCapacityByWagonType(long trainId, int wagonType){
+    public int getTotalCapacity(long trainId, int wagonType){
         return trainRepository.getTotalSeatNumbers(trainId, wagonType);
+    }
+    public int getTrainType(Long id, Integer type){
+        return trainRepository.getTrainType(id, type);
     }
 }
