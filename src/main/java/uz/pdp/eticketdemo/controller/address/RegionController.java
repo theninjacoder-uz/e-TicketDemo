@@ -1,6 +1,7 @@
-package uz.pdp.eticketdemo.controller;
+package uz.pdp.eticketdemo.controller.address;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.eticketdemo.model.dto.address.RegionDto;
 import uz.pdp.eticketdemo.response.ApiResponse;
@@ -17,8 +18,9 @@ public class RegionController {
     }
 
     @GetMapping("/list")
-    public ApiResponse getList(){
-        return service.getList();
+    public ResponseEntity<?> getList(){
+        ApiResponse list = service.getList();
+        return ResponseEntity.ok(list);
     }
 
     @GetMapping("/get")

@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -25,23 +27,30 @@ public class TicketEntity extends BaseEntity {
 
     @OneToOne
     private PassengerEntity passenger;
+
     @ManyToOne
     private UserEntity user;
     @ManyToOne
     private TrainEntity train;
+
     @ManyToOne
     private StationEntity fromStation;
+
     @ManyToOne
     private StationEntity toStation;
+
     @NonNull
-    private Date date;
+    private LocalDateTime date;
+
     @ManyToOne
     private WagonEntity wagon;
+
     @OneToOne
     private SeatEntity seat;
 
     private Integer orderStatus;
-    @NonNull
+
+    @NotBlank
     private Double price;
 
 }

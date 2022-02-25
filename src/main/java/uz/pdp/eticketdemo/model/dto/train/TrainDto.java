@@ -7,12 +7,8 @@ import lombok.Setter;
 @Setter
 public class TrainDto {
     private String name;
-
     private String model;
-
     private Integer capacity;
-
     private Integer availableSeatNumber;
-
     private double averageSpeed;
 }

@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.service.station;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.station.StationDto;
 import uz.pdp.eticketdemo.model.entity.station.StationEntity;
@@ -18,6 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class StationService extends BaseResponse implements BaseService<StationDto> {
     private final StationRepository stationRepository;
+    private final ModelMapper modelMapper;
     private final AddressService addressService;
 
     @Override
@@ -68,12 +70,12 @@ public class StationService extends BaseResponse implements BaseService<StationD
 
     @Override
     public ApiResponse add(StationDto item) {
-        StationEntity station=new StationEntity();
-
-        station.setName(item.getName());
-        station.setAddress(item.getAddress());
-        stationRepository.save(station);
-
+//        StationEntity station=new StationEntity();
+//
+//        station.setName(item.getName());
+//        station.setAddress(item.getAddress());
+        StationEntity station = modelMapper.map(item, StationEntity.class);
+        SUCCESS.setData(stationRepository.save(station));
         return SUCCESS;
     }
 

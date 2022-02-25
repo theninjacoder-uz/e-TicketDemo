@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.service.address;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.address.CountryDto;
 import uz.pdp.eticketdemo.model.entity.address.CountryEntity;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CountryService extends BaseResponse implements BaseService<CountryDto> {
     private final CountryRepository countryRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public ApiResponse getList() {
@@ -28,7 +30,7 @@ public class CountryService extends BaseResponse implements BaseService<CountryD
     public ApiResponse getById(Long id) {
         Optional<CountryEntity> optional = countryRepository.findById(id);
 
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             SUCCESS.setData(optional.get());
             return SUCCESS;
         }
@@ -39,7 +41,7 @@ public class CountryService extends BaseResponse implements BaseService<CountryD
     @Override
     public ApiResponse delete(Long id) {
         boolean exists = countryRepository.existsById(id);
-        if(exists) {
+        if (exists) {
             countryRepository.deleteById(id);
             return SUCCESS;
         }
@@ -50,10 +52,10 @@ public class CountryService extends BaseResponse implements BaseService<CountryD
     public ApiResponse edit(Long id, CountryDto item) {
         Optional<CountryEntity> optional = countryRepository.findById(id);
 
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             CountryEntity country = optional.get();
 
-            country.setCountryName(item.getName());
+            country.setName(item.getName());
 
             countryRepository.save(country);
             SUCCESS.setData(country);
@@ -65,9 +67,13 @@ public class CountryService extends BaseResponse implements BaseService<CountryD
 
     @Override
     public ApiResponse add(CountryDto item) {
-        CountryEntity country=new CountryEntity();
+//        CountryEntity country=new CountryEntity();
+//
+//        country.setCountryName(item.getName());
+        CountryEntity country = modelMapper.map(
+                item, CountryEntity.class
+        );
 
-        country.setCountryName(item.getName());
 
         countryRepository.save(country);
 

@@ -9,8 +9,8 @@ import uz.pdp.eticketdemo.model.entity.address.AddressEntity;
 public class CountryDto {
     private String name;
 
-    @Setter
-    @Getter
-    public static class AddressDto extends AddressEntity {
-    }
+//    @Setter
+//    @Getter
+//    public static class AddressDto extends AddressEntity {
+//    }
 }

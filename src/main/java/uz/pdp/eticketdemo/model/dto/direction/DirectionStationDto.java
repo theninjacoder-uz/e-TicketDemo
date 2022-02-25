@@ -6,9 +6,9 @@ import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 
 @Getter
 @Setter
-public class DirectionStationDto{
+public class DirectionStationDto {
     private long stationId;
     private long directionId;
     private int stationOrder;
-    private Double distanceWithNextStation;
+    private double distanceWithNextStation;
 }

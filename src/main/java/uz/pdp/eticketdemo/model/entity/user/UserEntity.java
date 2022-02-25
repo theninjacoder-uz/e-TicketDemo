@@ -9,7 +9,8 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Entity(name = "users")
+@Entity
+@Table(name = "users")
 public class UserEntity extends BaseEntity {
 
     @Column(nullable = false)

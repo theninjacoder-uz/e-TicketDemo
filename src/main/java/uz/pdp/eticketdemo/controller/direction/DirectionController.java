@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.eticketdemo.model.dto.direction.DirectionDto;
-import uz.pdp.eticketdemo.model.dto.direction.DirectionStationDto;
 import uz.pdp.eticketdemo.service.direction.DirectionService;
 
 @RestController

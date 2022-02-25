@@ -2,7 +2,7 @@ package uz.pdp.eticketdemo.service.seat;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.eticketdemo.model.dto.train.seat.SeatTypeDto;
+import uz.pdp.eticketdemo.model.dto.seat.SeatTypeDto;
 import uz.pdp.eticketdemo.model.entity.seat.SeatEntity;
 import uz.pdp.eticketdemo.model.entity.seat.SeatType;
 import uz.pdp.eticketdemo.model.entity.wagon.WagonEntity;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class SeatService extends BaseResponse implements BaseService<SeatTypeDto> {
 
     private final SeatRepository seatRepository;
-    //private final SeatStatusRepository seatStatusRepository;
+
     @Override
     public ApiResponse getList() {
         List<SeatEntity> allSeats = seatRepository.findAll();
@@ -89,7 +89,7 @@ public class SeatService extends BaseResponse implements BaseService<SeatTypeDto
 //
 //            seatEntityList.add(seat);
 //            statusEntities.add(seatStatus);
-//            n++;
+            n++;
         }
 
         seatRepository.saveAll(seatEntityList);

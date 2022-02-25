@@ -9,22 +9,22 @@ import uz.pdp.eticketdemo.model.dto.schedule.ScheduleSearchDto;
 import uz.pdp.eticketdemo.model.dto.station.StationScheduleDto;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 import uz.pdp.eticketdemo.model.entity.schedule.ScheduleEntity;
-import uz.pdp.eticketdemo.model.entity.schedule.ScheduleSeatEntity;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
 import uz.pdp.eticketdemo.repository.direction.DirectionStationRepository;
 import uz.pdp.eticketdemo.repository.schedule.ScheduleRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
+import uz.pdp.eticketdemo.service.booking.BookingService;
 import uz.pdp.eticketdemo.service.direction.DirectionStationService;
 import uz.pdp.eticketdemo.service.station.StationService;
 import uz.pdp.eticketdemo.service.train.TrainService;
 
 import javax.persistence.EntityManager;
+import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +35,7 @@ public class ScheduleService implements BaseService<ScheduleDto> {
     private final DirectionStationRepository directionStationRepository;
     private final DirectionStationService directionStationService;
     private final TrainService trainService;
+    private final BookingService bookingService;
     private final StationService stationService;
     private final ModelMapper modelMapper;
     private final EntityManager entityManager;
@@ -69,8 +70,8 @@ public class ScheduleService implements BaseService<ScheduleDto> {
     public ApiResponse generateScheduleForTrain(ScheduleDto scheduleDto){
 
         //Parse String to DateTime
-        LocalDateTime dateTime = LocalDateTime.parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-DD-mm HH:mm"));
-        LocalDateTime travelDate = LocalDateTime.parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-DD-mm HH:mm"));
+        LocalDateTime dateTime = LocalDateTime.parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        LocalDateTime travelDate = LocalDateTime.parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
 
         List<DirectionStationEntity> directionStationList = directionStationRepository.getDirectionStationEntitiesByDirectionIdOrderByStationOrder(scheduleDto.getDirectionId());
@@ -107,12 +108,10 @@ public class ScheduleService implements BaseService<ScheduleDto> {
         }
 
         //TODO some optimizations needed
-
         return BaseResponse.SUCCESS;
     }
 
-
-    public ApiResponse findSchedule(ScheduleSearchDto searchDto){
+    public ApiResponse getAvailableTrainMap(ScheduleSearchDto searchDto){
         //TODO get station order list from Madina's method
         //List<someDto> dtoList =  StationService.getDirectionStation(searchDto.getFromId(), searchDto.getToId);
 
@@ -123,9 +122,15 @@ public class ScheduleService implements BaseService<ScheduleDto> {
 //                DirectionStationSearchEntity.class
 //                ).getResultList();
 
-        List<DirectionBetweenStationsDto> directionsByTwoStations = directionStationService.getDirectionsByTwoStations(searchDto.getFromRegionId(), searchDto.getToRegionId());
-        long seatStatus = 1 << 30;
+        List<DirectionBetweenStationsDto> directionsByTwoStations
+                = directionStationService.getDirectionsByTwoStations(searchDto.getFromRegionId(), searchDto.getToRegionId());
         //TODO increase number of stations if you needed
+
+//        Map<> availableSchedules = new HashMap<>();
+
+        List<StationScheduleDto> responseList = new ArrayList<>();
+
+//        Map<StationScheduleDto, Long> responseMap = new HashMap<>();
 
         for (DirectionBetweenStationsDto twoStation : directionsByTwoStations) {
 //            Integer numberOfStations = twoStation.getNumberOfStations();
@@ -133,13 +138,29 @@ public class ScheduleService implements BaseService<ScheduleDto> {
             Integer fromStationOrder = twoStation.getFromStationOrder();
             Integer toStationOrder = twoStation.getToStationOrder();
 
-            List<StationScheduleDto> stationSchedules = scheduleRepository.getStationsScheduleByDate(searchDto.getLocalDateTime(), twoStation.getFromStationId(), twoStation.getToStationId());
-            //TODO check available seats by train_id and wagon_type
+            LocalDateTime startTime = LocalDateTime.parse(searchDto.getTravelDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDateTime endTime = startTime.plusDays(1);
+
+
+            List<StationScheduleDto> stationSchedules =
+                    scheduleRepository.getStationsScheduleByDate(startTime,endTime, twoStation.getFromStationId(), twoStation.getToStationId());
+            // TODO check available seats by train_id and wagon_type
+
+            for (StationScheduleDto stationSchedule : stationSchedules) {
+                long trainId = stationSchedule.getTrainId();
+                long occupiedSeatNumbers = bookingService.getOccupiedSeatNumbers(fromStationOrder, toStationOrder, trainId, startTime);
+                int capacityBusinessClass = trainService.getTotalCapacityByWagonType(trainId, 1);
+                int capacityFirstClass = trainService.getTotalCapacityByWagonType(trainId, 2);
+                int capacityEconomyClass = trainService.getTotalCapacityByWagonType(trainId, 4);
+
+                long availableSeats = capacityEconomyClass + capacityBusinessClass+capacityFirstClass - occupiedSeatNumbers;
+
+//                responseMap.put(stationSchedule, availableSeats);
+                stationSchedule.setAvailableSeatNumbers(availableSeats);
+                responseList.add(stationSchedule);
+            }
         }
-
-
-        return null;
-
+        BaseResponse.SUCCESS.setData(responseList);
+        return BaseResponse.SUCCESS;
     }
-
 }

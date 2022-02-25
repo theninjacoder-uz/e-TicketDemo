@@ -18,6 +18,9 @@ public class StationEntity extends BaseEntity {
 
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
     private AddressEntity address;
 }
