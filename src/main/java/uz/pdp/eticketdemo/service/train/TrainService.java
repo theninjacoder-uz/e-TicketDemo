@@ -3,6 +3,7 @@ package uz.pdp.eticketdemo.service.train;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import uz.pdp.eticketdemo.model.dto.train.TrainAvailableCapacity;
 import uz.pdp.eticketdemo.model.dto.train.TrainDto;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
 import uz.pdp.eticketdemo.repository.train.TrainRepository;
@@ -85,6 +86,7 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
     }
 
     public int getTotalCapacityByWagonType(long trainId, int wagonType){
-        return trainRepository.getTotalSeatNumbers(trainId, wagonType);
+        TrainAvailableCapacity numbers = trainRepository.getTotalSeatNumbers(trainId, wagonType);
+        return numbers == null ? 0 : numbers.getTotalSeats();
     }
 }
