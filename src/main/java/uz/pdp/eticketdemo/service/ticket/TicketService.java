@@ -94,8 +94,8 @@ public class TicketService extends BaseResponse implements BaseService<TicketDto
     }
 
     public ApiResponse getOrdersByDateAndTwoRegions(Long fromRegionId, Long toRegionId, Date date) {
-        List<StationEntity> fromStations = stationRepository.getStationsByRegionId(fromRegionId);
-        List<StationEntity> toStations = stationRepository.getStationsByRegionId(toRegionId);
+        List<StationEntity> fromStations = stationRepository.getAllByAddressRegionIdIn(fromRegionId);
+        List<StationEntity> toStations = stationRepository.getAllByAddressRegionIdIn(toRegionId);
         List<TicketEntity> orders = new ArrayList<>();
         for (StationEntity sFrom : fromStations) {
             for (StationEntity sTo : toStations) {
