@@ -13,6 +13,11 @@ import java.util.List;
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
 
+    @Column(nullable = false)
+    private  String firstName;
+
+    private  String lastName;
+
     @Column
     private String chatId;
 
