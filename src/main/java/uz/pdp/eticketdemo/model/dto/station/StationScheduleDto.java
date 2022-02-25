@@ -5,13 +5,10 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-public class StationScheduleDto {
+public interface StationScheduleDto {
 
-    private long trainId;
-    private long availableSeatNumbers;
-    private LocalDateTime departureTime;
-    private LocalDateTime arrivalTime;
-
+     Long getTrainId();
+     Long getAvailableSeatNumbers();
+     LocalDateTime getDepartureTime();
+     LocalDateTime getArrivalTime();
 }

@@ -9,6 +9,9 @@ import java.util.List;
 public interface StationRepository extends JpaRepository<StationEntity, Long> {
 
 
-    @Query(value = "select * from station where address_id = (select id from address where region_id = ?1)", nativeQuery = true)
-    List<StationEntity> getStationsByRegionId(Long regionId);
+//    @Query(value = "select s.id as id, s.name as name from station s inner join address a on s.address_id = a.id " +
+//            "where a.region_id = ?1", nativeQuery = true)
+//    List<StationEntity> getAllStationsByRegionId(Long regionId);
+    @Query("select s from StationEntity s where s.address.regionId in ?1")
+    List<StationEntity> getAllByAddressRegionIdIn(Long regionId);
 }
