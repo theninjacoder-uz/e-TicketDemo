@@ -49,11 +49,11 @@ public class BookingService implements BaseService<BookingEntity> {
             fInd++;
         }
 
-//        List<BookingEntity> list = bookingRepository.getAllByTrainIdAndTravelDate(trainId, date);
-//        for (BookingEntity bookingEntity : list) {
-//            long l = bookingEntity.getSeatOccupationInterval() & cnt;
-//            if(l != 0) ans++;
-//        }
+        List<BookingEntity> list = bookingRepository.getAllByTrainIdAndTravelDate(trainId, date, date.plusDays(1L));
+        for (BookingEntity bookingEntity : list) {
+            long l = bookingEntity.getSeatOccupationInterval() & cnt;
+            if(l != 0) ans++;
+        }
         return ans;
     }
 

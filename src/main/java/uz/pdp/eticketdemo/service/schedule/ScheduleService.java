@@ -7,6 +7,7 @@ import uz.pdp.eticketdemo.model.dto.direction.DirectionBetweenStationsDto;
 import uz.pdp.eticketdemo.model.dto.schedule.ScheduleDto;
 import uz.pdp.eticketdemo.model.dto.schedule.ScheduleSearchDto;
 import uz.pdp.eticketdemo.model.dto.station.StationScheduleDto;
+import uz.pdp.eticketdemo.model.dto.station.StationScheduleResponseDto;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 import uz.pdp.eticketdemo.model.entity.schedule.ScheduleEntity;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
@@ -31,7 +32,7 @@ import java.util.*;
 public class ScheduleService implements BaseService<ScheduleDto> {
 
     public final ScheduleRepository scheduleRepository;
-//    public final ScheduleSeatRepository scheduleSeatRepository;
+    //    public final ScheduleSeatRepository scheduleSeatRepository;
     private final DirectionStationRepository directionStationRepository;
     private final DirectionStationService directionStationService;
     private final TrainService trainService;
@@ -67,18 +68,22 @@ public class ScheduleService implements BaseService<ScheduleDto> {
     }
 
     //Generate schedule by directionStationList, trainId and travel start dateTime
-    public ApiResponse generateScheduleForTrain(ScheduleDto scheduleDto){
+    public ApiResponse generateScheduleForTrain(ScheduleDto scheduleDto) {
 
         //Parse String to DateTime
-        LocalDateTime dateTime = LocalDateTime.parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        LocalDateTime travelDate = LocalDateTime.parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        LocalDateTime dateTime = LocalDateTime
+                .parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        LocalDateTime travelDate = LocalDateTime
+                .parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
 
-        List<DirectionStationEntity> directionStationList = directionStationRepository.getDirectionStationEntitiesByDirectionIdOrderByStationOrder(scheduleDto.getDirectionId());
-        Optional<TrainEntity> optionalTrainEntityById = trainService.getOptionalTrainEntityById(scheduleDto.getTrainId());
+        List<DirectionStationEntity> directionStationList = directionStationRepository
+                .getDirectionStationEntitiesByDirectionIdOrderByStationOrder(scheduleDto.getDirectionId());
+        Optional<TrainEntity> optionalTrainEntityById = trainService
+                .getOptionalTrainEntityById(scheduleDto.getTrainId());
         //TODO use function to find directionStationList and train by id;
 
-        if(optionalTrainEntityById.isEmpty())
+        if (optionalTrainEntityById.isEmpty())
             return BaseResponse.NOT_FOUND;
         //TODO use exception
 
@@ -111,7 +116,7 @@ public class ScheduleService implements BaseService<ScheduleDto> {
         return BaseResponse.SUCCESS;
     }
 
-    public ApiResponse getAvailableTrainMap(ScheduleSearchDto searchDto){
+    public ApiResponse getAvailableTrainMap(ScheduleSearchDto searchDto) {
         //TODO get station order list from Madina's method
         //List<someDto> dtoList =  StationService.getDirectionStation(searchDto.getFromId(), searchDto.getToId);
 
@@ -128,7 +133,7 @@ public class ScheduleService implements BaseService<ScheduleDto> {
 
 //        Map<> availableSchedules = new HashMap<>();
 
-        List<StationScheduleDto> responseList = new ArrayList<>();
+        List<StationScheduleResponseDto> responseList = new ArrayList<>();
 
 //        Map<StationScheduleDto, Long> responseMap = new HashMap<>();
 
@@ -138,26 +143,31 @@ public class ScheduleService implements BaseService<ScheduleDto> {
             Integer fromStationOrder = twoStation.getFromStationOrder();
             Integer toStationOrder = twoStation.getToStationOrder();
 
-            LocalDateTime startTime = LocalDateTime.parse(searchDto.getTravelDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            LocalDateTime endTime = startTime.plusDays(1);
+            LocalDateTime startTime = LocalDateTime
+                    .parse(searchDto.getTravelDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            LocalDateTime endTime = startTime.plusDays(1L);
 
 
-            List<StationScheduleDto> stationSchedules =
-                    scheduleRepository.getStationsScheduleByDate(startTime,endTime, twoStation.getFromStationId(), twoStation.getToStationId());
+            List<StationScheduleDto> stationSchedules = scheduleRepository
+                    .getStationsScheduleByDate(startTime, endTime, twoStation.getFromStationId(), twoStation.getToStationId());
             // TODO check available seats by train_id and wagon_type
 
             for (StationScheduleDto stationSchedule : stationSchedules) {
                 long trainId = stationSchedule.getTrainId();
-                long occupiedSeatNumbers = bookingService.getOccupiedSeatNumbers(fromStationOrder, toStationOrder, trainId, startTime);
-                int capacityBusinessClass = trainService.getTotalCapacityByWagonType(trainId, 1);
-                int capacityFirstClass = trainService.getTotalCapacityByWagonType(trainId, 2);
-                int capacityEconomyClass = trainService.getTotalCapacityByWagonType(trainId, 4);
+                long occupiedSeatNumbers = bookingService
+                        .getOccupiedSeatNumbers(fromStationOrder, toStationOrder, trainId, startTime);
+                int capacityBusinessClass = trainService
+                        .getTotalCapacityByWagonType(trainId, 1);
+                int capacityFirstClass = trainService
+                        .getTotalCapacityByWagonType(trainId, 2);
+                int capacityEconomyClass = trainService
+                        .getTotalCapacityByWagonType(trainId, 4);
 
-                long availableSeats = capacityEconomyClass + capacityBusinessClass+capacityFirstClass - occupiedSeatNumbers;
+                long availableSeats = capacityEconomyClass + capacityBusinessClass + capacityFirstClass - occupiedSeatNumbers;
 
 //                responseMap.put(stationSchedule, availableSeats);
-                stationSchedule.setAvailableSeatNumbers(availableSeats);
-                responseList.add(stationSchedule);
+//                stationSchedule.setAvailableSeatNumbers(availableSeats);
+                responseList.add(new StationScheduleResponseDto(stationSchedule.getTrainId(), availableSeats, stationSchedule.getDepartureTime(), stationSchedule.getArrivalTime()));
             }
         }
         BaseResponse.SUCCESS.setData(responseList);

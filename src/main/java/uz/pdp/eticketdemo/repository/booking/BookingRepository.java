@@ -11,7 +11,6 @@ import java.util.List;
 
 @Repository
 public interface BookingRepository extends JpaRepository<BookingEntity, Long> {
-
-//    @Query("select b from booking b where b.trainId = ?1 and b.travelDate = ?2")
-//    List<BookingEntity> getAllByTrainIdAndTravelDate(Long trainId, LocalDateTime travelDate);
+    @Query(value = "select * from booking b where b.train_id = ?1 and b.travel_date >= ?2 and b.travel_date < ?3", nativeQuery = true)
+    List<BookingEntity> getAllByTrainIdAndTravelDate(Long trainId, LocalDateTime startDate, LocalDateTime endDate);
 }

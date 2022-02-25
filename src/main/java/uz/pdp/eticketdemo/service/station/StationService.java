@@ -90,6 +90,6 @@ public class StationService extends BaseResponse implements BaseService<StationD
 //                }
 //            }
 //        }
-        return stationRepository.getStationsByRegionId(regionId);
+        return stationRepository.getAllByAddressRegionIdIn(regionId);
     }
 }

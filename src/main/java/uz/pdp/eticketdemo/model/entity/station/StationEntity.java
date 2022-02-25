@@ -12,9 +12,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "station")
 public class StationEntity extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private String name;
 
@@ -23,4 +20,15 @@ public class StationEntity extends BaseEntity {
             cascade = CascadeType.ALL
     )
     private AddressEntity address;
+
+//    @Column(nullable = false)
+//    private String streetName;
+//
+//    @Column(nullable = false)
+//    private Integer homeNumber;
+//
+//    //    @ManyToOne(fetch = FetchType.EAGER)
+////    @JsonProperty("region")
+////    private RegionEntity region;
+//    private long regionId;
 }

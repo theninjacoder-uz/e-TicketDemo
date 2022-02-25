@@ -93,13 +93,15 @@ public class DirectionStationService extends BaseResponse implements BaseService
 
         for (StationEntity sFrom : fromStations) {
             for (StationEntity sTo : toStations) {
-                 directionStations = directionStationRepository
+                 List<DirectionBetweenStationsDto> result = directionStationRepository
                         .getDirectionStationEntitiesByTwoStations(sFrom.getId(), sTo.getId());
 
-                for (DirectionBetweenStationsDto directionStation: directionStations) {
-                    Integer numberOfStations = directionStationRepository.getNumberOfStationForDirection(directionStation.getDirectionId());
-                    directionStation.setNumberOfStations(numberOfStations);
-                }
+                 if(result.size() > 0)
+                     directionStations.addAll(result);
+//                for (DirectionBetweenStationsDto directionStation: directionStations) {
+//                    Integer numberOfStations = directionStationRepository.getNumberOfStationForDirection(directionStation.getDirectionId());
+////                    directionStation.setNumberOfStations(numberOfStations);
+//                }
 
 
 //                for (DirectionStationEntity d : directionStations) {
@@ -115,7 +117,6 @@ public class DirectionStationService extends BaseResponse implements BaseService
 //
 //                    directionBetweenStationsDtos.add(dto);
 //                }
-
             }
         }
         return directionStations;
