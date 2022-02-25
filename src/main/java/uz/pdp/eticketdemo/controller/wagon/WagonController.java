@@ -2,10 +2,8 @@ package uz.pdp.eticketdemo.controller.wagon;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.eticketdemo.model.dto.train.TrainDto;
 import uz.pdp.eticketdemo.model.dto.train.WagonDto;
 import uz.pdp.eticketdemo.response.ApiResponse;
-import uz.pdp.eticketdemo.service.train.TrainService;
 import uz.pdp.eticketdemo.service.wagon.WagonService;
 
 @RestController
