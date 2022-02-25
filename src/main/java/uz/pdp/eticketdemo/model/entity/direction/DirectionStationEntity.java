@@ -10,7 +10,6 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "direction_station", uniqueConstraints = {@UniqueConstraint(columnNames = {"stationId", "directionId"})})
-
 public class DirectionStationEntity extends BaseEntity {
 
     private long stationId;

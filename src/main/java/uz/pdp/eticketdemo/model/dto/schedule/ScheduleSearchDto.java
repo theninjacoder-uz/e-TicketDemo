@@ -17,6 +17,5 @@ public class ScheduleSearchDto {
     private long toRegionId;
 
     @NotBlank
-    @JsonFormat(pattern = "yyyy-DD-mm")
-    private LocalDateTime localDateTime;
+    private String travelDateTime;
 }

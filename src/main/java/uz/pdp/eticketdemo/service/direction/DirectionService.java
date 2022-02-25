@@ -1,14 +1,11 @@
 package uz.pdp.eticketdemo.service.direction;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import uz.pdp.eticketdemo.model.dto.direction.DirectionDto;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionEntity;
-import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 import uz.pdp.eticketdemo.repository.direction.DirectionRepository;
-import uz.pdp.eticketdemo.repository.direction.DirectionStationRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
@@ -21,6 +18,7 @@ import java.util.Optional;
 public class DirectionService extends BaseResponse implements BaseService<DirectionDto> {
 
     private final DirectionRepository directionRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public ApiResponse getList() {
@@ -66,9 +64,10 @@ public class DirectionService extends BaseResponse implements BaseService<Direct
 
     @Override
     public ApiResponse add(DirectionDto item) {
-        DirectionEntity direction = new DirectionEntity();
-        direction.setName(item.getName());
-        directionRepository.save(direction);
+//        DirectionEntity direction = new DirectionEntity();
+//        direction.setName(item.getName());
+        DirectionEntity direction = modelMapper.map(item, DirectionEntity.class);
+        SUCCESS.setData(directionRepository.save(direction));
         return SUCCESS;
     }
 

@@ -1,6 +1,7 @@
 package uz.pdp.eticketdemo.service.train;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.train.TrainDto;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class TrainService extends BaseResponse implements BaseService<TrainDto> {
 
     private final TrainRepository trainRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public ApiResponse getList() {
@@ -54,15 +56,15 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
     public ApiResponse edit(Long id, TrainDto item) {
         Optional<TrainEntity> findById = trainRepository.findById(id);
         if(findById.isPresent()){
-            TrainEntity trainEntity = findById.get();
-            trainEntity.setName(item.getName());
-            trainEntity.setModel(item.getModel());
-            trainEntity.setCapacity(item.getCapacity());
-            trainEntity.setAvailableSeatNumber(item.getAvailableSeatNumber());
-            trainEntity.setAverageSpeed(item.getAverageSpeed());
-
-            trainRepository.save(trainEntity);
-            SUCCESS.setData(trainEntity);
+//            TrainEntity trainEntity = findById.get();
+//            trainEntity.setName(item.getName());
+//            trainEntity.setModel(item.getModel());
+//            trainEntity.setCapacity(item.getCapacity());
+//            trainEntity.setAvailableSeatNumber(item.getAvailableSeatNumber());
+//            trainEntity.setAverageSpeed(item.getAverageSpeed());
+            TrainEntity train = modelMapper.map(item, TrainEntity.class);
+            trainRepository.save(train);
+            SUCCESS.setData(train);
             return SUCCESS;
         }
         return NOT_FOUND;
@@ -70,14 +72,15 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
 
     @Override
     public ApiResponse add(TrainDto item) {
-        TrainEntity trainEntity = new TrainEntity();
-        trainEntity.setName(item.getName());
-        trainEntity.setModel(item.getModel());
-        trainEntity.setCapacity(item.getCapacity());
-        trainEntity.setAvailableSeatNumber(item.getAvailableSeatNumber());
-        trainEntity.setAverageSpeed(item.getAverageSpeed());
-        trainRepository.save(trainEntity);
-        SUCCESS.setData(trainEntity);
+//        TrainEntity trainEntity = new TrainEntity();
+//        trainEntity.setName(item.getName());
+//        trainEntity.setModel(item.getModel());
+//        trainEntity.setCapacity(item.getCapacity());
+//        trainEntity.setAvailableSeatNumber(item.getAvailableSeatNumber());
+//        trainEntity.setAverageSpeed(item.getAverageSpeed());
+        TrainEntity train = modelMapper.map(item, TrainEntity.class);
+        trainRepository.save(train);
+        SUCCESS.setData(train);
         return SUCCESS;
     }
 

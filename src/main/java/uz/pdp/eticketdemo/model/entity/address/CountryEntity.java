@@ -19,9 +19,8 @@ public class CountryEntity extends BaseEntity {
     private String name;
 
     @OneToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "country"
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
     )
     private List<RegionEntity>  region;
 }

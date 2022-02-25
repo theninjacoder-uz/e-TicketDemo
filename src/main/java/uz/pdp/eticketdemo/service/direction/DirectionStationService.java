@@ -26,7 +26,7 @@ public class DirectionStationService extends BaseResponse implements BaseService
 
     private final DirectionStationRepository directionStationRepository;
     private final StationService stationService;
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Override
     public ApiResponse getList() {
@@ -72,10 +72,10 @@ public class DirectionStationService extends BaseResponse implements BaseService
 
     @Override
     public ApiResponse add(DirectionStationDto item) {
-
-        directionStationRepository.updateStationOrder(item.getDirectionId(), item.getStationOrder());
+        modelMapper.getConfiguration().setAmbiguityIgnored(true);
+//        directionStationRepository.updateStationOrder(item.getDirectionId(), item.getStationOrder());
         DirectionStationEntity entity = modelMapper.map(item, DirectionStationEntity.class);
-        directionStationRepository.save(entity);
+        SUCCESS.setData(directionStationRepository.save(entity));
 
         return SUCCESS;
     }

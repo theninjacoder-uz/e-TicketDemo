@@ -16,8 +16,8 @@ public class RegionEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String region;
 
-    @ManyToOne(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
-    )
-    private CountryEntity country;
+//    @ManyToOne(fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL
+//    )
+//    private CountryEntity country;
 }
