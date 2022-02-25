@@ -7,6 +7,7 @@ import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 import uz.pdp.eticketdemo.model.entity.seat.SeatEntity;
 import uz.pdp.eticketdemo.model.entity.train.TrainEntity;
+import uz.pdp.eticketdemo.model.entity.user.UserEntity;
 import uz.pdp.eticketdemo.model.entity.wagon.WagonEntity;
 import uz.pdp.eticketdemo.model.entity.user.PassengerEntity;
 
@@ -24,6 +25,8 @@ public class TicketEntity extends BaseEntity {
 
     @OneToOne
     private PassengerEntity passenger;
+    @ManyToOne
+    private UserEntity user;
     @ManyToOne
     private TrainEntity train;
     @ManyToOne

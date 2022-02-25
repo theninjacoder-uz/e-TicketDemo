@@ -3,12 +3,16 @@ package uz.pdp.eticketdemo.service.ticket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eticketdemo.model.dto.ticket.TicketDto;
+import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 import uz.pdp.eticketdemo.model.entity.ticket.TicketEntity;
+import uz.pdp.eticketdemo.repository.station.StationRepository;
 import uz.pdp.eticketdemo.repository.ticket.TicketRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TicketService extends BaseResponse implements BaseService<TicketDto> {
     private final TicketRepository ticketRepository;
+    private final StationRepository stationRepository;
 
     @Override
     public ApiResponse getList() {
@@ -28,7 +33,7 @@ public class TicketService extends BaseResponse implements BaseService<TicketDto
     public ApiResponse getById(Long id) {
         Optional<TicketEntity> optional = ticketRepository.findById(id);
 
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             SUCCESS.setData(optional.get());
             return SUCCESS;
         }
@@ -39,7 +44,7 @@ public class TicketService extends BaseResponse implements BaseService<TicketDto
     @Override
     public ApiResponse delete(Long id) {
         boolean exists = ticketRepository.existsById(id);
-        if(exists) {
+        if (exists) {
             ticketRepository.deleteById(id);
             return SUCCESS;
         }
@@ -50,7 +55,7 @@ public class TicketService extends BaseResponse implements BaseService<TicketDto
     public ApiResponse edit(Long id, TicketDto item) {
         Optional<TicketEntity> optional = ticketRepository.findById(id);
 
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             TicketEntity ticket = optional.get();
             ticket.setPassenger(item.getPassenger());
             ticket.setTrain(item.getTrain());
@@ -72,7 +77,7 @@ public class TicketService extends BaseResponse implements BaseService<TicketDto
 
     @Override
     public ApiResponse add(TicketDto item) {
-        TicketEntity ticket=new TicketEntity();
+        TicketEntity ticket = new TicketEntity();
 
         ticket.setPassenger(item.getPassenger());
         ticket.setTrain(item.getTrain());
@@ -87,4 +92,18 @@ public class TicketService extends BaseResponse implements BaseService<TicketDto
         ticketRepository.save(ticket);
         return SUCCESS;
     }
+
+    public ApiResponse getOrdersByDateAndTwoRegions(Long fromRegionId, Long toRegionId, Date date) {
+        List<StationEntity> fromStations = stationRepository.getStationsByRegionId(fromRegionId);
+        List<StationEntity> toStations = stationRepository.getStationsByRegionId(toRegionId);
+        List<TicketEntity> orders = new ArrayList<>();
+        for (StationEntity sFrom : fromStations) {
+            for (StationEntity sTo : toStations) {
+                orders.addAll(ticketRepository.getTicketEntitiesByStationsIdAndDate(fromRegionId, toRegionId, date));
+            }
+        }
+        SUCCESS.setData(orders);
+        return SUCCESS;
+    }
+
 }
