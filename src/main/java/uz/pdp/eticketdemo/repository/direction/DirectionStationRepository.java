@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import uz.pdp.eticketdemo.model.dto.direction.DirectionBetweenStationsDto;
+import uz.pdp.eticketdemo.model.dto.direction.StationsOfDirection;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 
 import java.util.List;
@@ -25,4 +26,7 @@ public interface DirectionStationRepository extends JpaRepository<DirectionStati
 
     @Query(value = "select count (station_id) from direction_station where direction_id = ?1", nativeQuery = true)
     Integer getNumberOfStationForDirection(Long directionId);
+
+    @Query(value = "select d.station_id as stationId, d.station_order as stationOrder from direction_station d where direction_id = ?1", nativeQuery = true)
+    List<StationsOfDirection> getDirectionStationsWithOrdersByDirectionId(Long directionId);
 }

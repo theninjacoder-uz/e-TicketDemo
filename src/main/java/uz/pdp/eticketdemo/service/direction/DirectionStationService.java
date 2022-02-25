@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import uz.pdp.eticketdemo.model.dto.direction.DirectionBetweenStationsDto;
 import uz.pdp.eticketdemo.model.dto.direction.DirectionStationDto;
+import uz.pdp.eticketdemo.model.dto.direction.StationsOfDirection;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 import uz.pdp.eticketdemo.repository.direction.DirectionStationRepository;
@@ -120,6 +121,14 @@ public class DirectionStationService extends BaseResponse implements BaseService
             }
         }
         return directionStations;
+    }
+
+    public ApiResponse getDirectionStationsWithOrders(Long directionId){
+        List<StationsOfDirection> directionStationsWithOrdersByDirectionId =
+                directionStationRepository.getDirectionStationsWithOrdersByDirectionId(directionId);
+
+        SUCCESS.setData(directionStationsWithOrdersByDirectionId);
+        return SUCCESS;
     }
 
 }
