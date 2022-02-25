@@ -2,7 +2,7 @@ package uz.pdp.eticketdemo.controller.wagon;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.eticketdemo.model.dto.train.WagonDto;
+import uz.pdp.eticketdemo.model.dto.wagon.WagonDto;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.service.wagon.WagonService;
 

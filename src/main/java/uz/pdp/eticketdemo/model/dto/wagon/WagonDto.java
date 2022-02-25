@@ -1,4 +1,4 @@
-package uz.pdp.eticketdemo.model.dto.train;
+package uz.pdp.eticketdemo.model.dto.wagon;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,10 +10,8 @@ import uz.pdp.eticketdemo.model.entity.wagon.WagonType;
 public class WagonDto {
 
     private int number;
-
-    private Integer capacity;
-
-    private TrainEntity trainEntity;
-
-    private Integer wagonType;
+    private int capacity;
+    private long trainId;
+    private double price;
+    private int wagonType;
 }
