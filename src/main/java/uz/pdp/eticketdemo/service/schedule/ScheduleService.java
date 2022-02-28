@@ -79,8 +79,10 @@ public class ScheduleService implements BaseService<ScheduleDto> {
 
         List<DirectionStationEntity> directionStationList = directionStationRepository
                 .getDirectionStationEntitiesByDirectionIdOrderByStationOrder(scheduleDto.getDirectionId());
+
         Optional<TrainEntity> optionalTrainEntityById = trainService
                 .getOptionalTrainEntityById(scheduleDto.getTrainId());
+
         //TODO use function to find directionStationList and train by id;
 
         if (optionalTrainEntityById.isEmpty())
@@ -116,7 +118,7 @@ public class ScheduleService implements BaseService<ScheduleDto> {
         return BaseResponse.SUCCESS;
     }
 
-    public ApiResponse getAvailableTrainMap(ScheduleSearchDto searchDto) {
+    public ApiResponse getAvailableTrainList(ScheduleSearchDto searchDto) {
         //TODO get station order list from Madina's method
         //List<someDto> dtoList =  StationService.getDirectionStation(searchDto.getFromId(), searchDto.getToId);
 

@@ -9,8 +9,7 @@ import java.util.Date;
 @Data
 public class PassengerDto {
 
-    private UserEntity user;
-
+    private long userId;
     private String firstName;
     private String lastName;
     private String gender;

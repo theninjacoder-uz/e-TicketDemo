@@ -7,5 +7,4 @@ import uz.pdp.eticketdemo.model.entity.address.AddressEntity;
 public class StationDto {
     private String name;
     private AddressEntity address;
-
 }

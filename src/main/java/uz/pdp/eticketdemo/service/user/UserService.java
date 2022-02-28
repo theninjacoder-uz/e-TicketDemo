@@ -71,5 +71,10 @@ public class UserService implements BaseService<UserDto> {
         return null;
     }
 
+    public boolean adminLogin(UserDto userDto){
+        return userRepository
+                .existsAdminByPhoneNumberAndPassword(userDto.getPhoneNumber(), userDto.getPassword());
+    }
+
     // TODO: 2/17/2022 Check user before adding him  
 }

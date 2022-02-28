@@ -2,6 +2,7 @@ package uz.pdp.eticketdemo.controller.train;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.eticketdemo.model.dto.station.StationDto;
 import uz.pdp.eticketdemo.model.dto.train.TrainDto;
@@ -17,22 +18,22 @@ public class TrainController {
     private final TrainService service;
 
     @PostMapping("/add")
-    public ApiResponse add(@RequestBody TrainDto trainDto){
-        return service.add(trainDto);
+    public ResponseEntity<?> add(@RequestBody TrainDto trainDto){
+        return ResponseEntity.ok(service.add(trainDto));
     }
 
     @GetMapping("/list")
-    public ApiResponse getList(){
-        return service.getList();
+    public ResponseEntity<?> getList(){
+        return ResponseEntity.ok(service.getList());
     }
 
     @GetMapping("/get")
-    public ApiResponse getById(@RequestParam(name = "id") Long id){
-        return service.getById(id);
+    public ResponseEntity<?> getById(@RequestParam(name = "id") Long id){
+        return ResponseEntity.ok(service.getById(id));
     }
 
     @PostMapping("/edit")
-    public ApiResponse edit(@RequestParam(name = "id") Long id, @RequestBody TrainDto trainDto){
-        return service.edit(id, trainDto);
+    public ResponseEntity<?> edit(@RequestParam(name = "id") Long id, @RequestBody TrainDto trainDto){
+        return ResponseEntity.ok(service.edit(id, trainDto));
     }
 }

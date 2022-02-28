@@ -54,7 +54,7 @@ public class PassengerService implements BaseService<PassengerDto> {
 
         if(optional.isPresent()){
             PassengerEntity passenger = optional.get();
-            passenger.setUserEntity(item.getUser());
+
             passenger.setFirstName(item.getFirstName());
             passenger.setLastName(item.getLastName());
             passenger.setGender(item.getGender());
@@ -74,9 +74,13 @@ public class PassengerService implements BaseService<PassengerDto> {
 
     @Override
     public ApiResponse add(PassengerDto item) {
-        PassengerEntity passenger=new PassengerEntity();
+        return null;
+    }
 
-        passenger.setUserEntity(item.getUser());
+    public ApiResponse add(Long userId, PassengerDto item) {
+        PassengerEntity passenger = new PassengerEntity();
+        //TODO check user by id;
+        passenger.setUserId(userId);
         passenger.setFirstName(item.getFirstName());
         passenger.setLastName(item.getLastName());
         passenger.setGender(item.getGender());

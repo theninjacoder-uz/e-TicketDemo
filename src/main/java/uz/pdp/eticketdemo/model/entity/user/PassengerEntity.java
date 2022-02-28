@@ -16,8 +16,7 @@ import java.util.Date;
 @Table(name = "passenger_info")
 public class PassengerEntity extends BaseEntity {
 
-    @ManyToOne
-    private UserEntity userEntity;
+    private long userId;
 
     @Column(nullable = false)
     private String firstName;

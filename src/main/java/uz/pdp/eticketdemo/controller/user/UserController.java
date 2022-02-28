@@ -1,5 +1,6 @@
 package uz.pdp.eticketdemo.controller.user;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.eticketdemo.model.dto.user.UserDto;
 import uz.pdp.eticketdemo.response.ApiResponse;
@@ -19,5 +20,10 @@ public class UserController {
     @PostMapping
     public ApiResponse addUser(@RequestBody UserDto userDto){
         return userService.add(userDto);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> adminLogin(@RequestBody UserDto userDto){
+        return ResponseEntity.ok(userService.adminLogin(userDto));
     }
 }

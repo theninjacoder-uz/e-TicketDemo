@@ -18,6 +18,6 @@ public class BookingController {
 
     @PostMapping("/search")
     public ResponseEntity<?> searchTrain(@RequestBody ScheduleSearchDto scheduleSearchDto) {
-        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getAvailableTrainMap(scheduleSearchDto));
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getAvailableTrainList(scheduleSearchDto));
     }
 }

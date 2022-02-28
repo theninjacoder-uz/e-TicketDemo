@@ -26,5 +26,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query(value = "select * from users ILIKE first_name = %?2% or ILIKE last_name = %?2% where phone_number = ?1 and email = ?3", nativeQuery = true)
     List<UserEntity> getUserEntitiesByFilter(String phoneNumber, String name, String email);
 
+    @Query(value = "select (count(u) > 0) from users u where u.phone_number = ?1 and u.password = ?2 and u.user_role & 12 > 0", nativeQuery = true)
+    boolean existsAdminByPhoneNumberAndPassword(String phoneNumber, String password);
+
+
+
 }
 
