@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionEntity;
+import uz.pdp.eticketdemo.model.entity.wagon.WagonEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,16 +21,9 @@ public class TrainEntity extends BaseEntity {
 
     private String model;
 
-//    @ManyToMany(
-//            fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL
-//    )
-//    @JoinTable(
-//            name = "direction_train",
-//            joinColumns = {@JoinColumn(name = "direction_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "train_id")}
-//    )
-//    private List<DirectionEntity> directionList;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "train")
+    @JoinTable(name = "train_id")
+    private List<WagonEntity> wagon;
 
     private Integer capacity;
 

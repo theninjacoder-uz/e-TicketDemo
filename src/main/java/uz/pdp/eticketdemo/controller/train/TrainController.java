@@ -32,8 +32,13 @@ public class TrainController {
         return ResponseEntity.ok(service.getById(id));
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/edite")
     public ResponseEntity<?> edit(@RequestParam(name = "id") Long id, @RequestBody TrainDto trainDto){
         return ResponseEntity.ok(service.edit(id, trainDto));
+    }
+
+    @GetMapping("/delete")
+    public ResponseEntity<?> delete(@RequestParam(name = "id") Long id){
+        return ResponseEntity.ok(service.delete(id));
     }
 }

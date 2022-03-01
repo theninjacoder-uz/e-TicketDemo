@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "wagon")
 public class WagonEntity extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private TrainEntity train;
 
     private Integer number;
