@@ -7,8 +7,6 @@ import uz.pdp.eticketdemo.model.dto.schedule.ScheduleDto;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.service.schedule.ScheduleService;
 
-import javax.websocket.server.PathParam;
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/schedule")

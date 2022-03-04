@@ -40,4 +40,8 @@ public class DirectionStationController {
         return ResponseEntity.status(HttpStatus.OK).body(directionStationService.getList());
     }
 
+//    @GetMapping("/routes")
+//    public HttpEntity<?> getDirections(){
+//        return ResponseEntity.ok(directionStationService.getDirectionWithNames());
+//    }
 }

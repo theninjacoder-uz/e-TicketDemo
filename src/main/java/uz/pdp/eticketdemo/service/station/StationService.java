@@ -3,24 +3,26 @@ package uz.pdp.eticketdemo.service.station;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import uz.pdp.eticketdemo.model.dto.station.StationDto;
+import uz.pdp.eticketdemo.model.dto.address.AddressDto;
+import uz.pdp.eticketdemo.model.dto.station.StationReceiveDto;
+import uz.pdp.eticketdemo.model.entity.address.AddressEntity;
 import uz.pdp.eticketdemo.model.entity.station.StationEntity;
+import uz.pdp.eticketdemo.repository.address.AddressRepository;
 import uz.pdp.eticketdemo.repository.station.StationRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.address.AddressService;
 import uz.pdp.eticketdemo.service.base.BaseService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class StationService extends BaseResponse implements BaseService<StationDto> {
+public class StationService extends BaseResponse implements BaseService<StationReceiveDto> {
     private final StationRepository stationRepository;
     private final ModelMapper modelMapper;
-    private final AddressService addressService;
+    private final AddressRepository addressRepository;
 
     @Override
     public ApiResponse getList() {
@@ -52,29 +54,37 @@ public class StationService extends BaseResponse implements BaseService<StationD
     }
 
     @Override
-    public ApiResponse edit(Long id, StationDto item) {
+    public ApiResponse edit(Long id, StationReceiveDto item) {
         Optional<StationEntity> optional = stationRepository.findById(id);
 
         if(optional.isPresent()){
             StationEntity station = optional.get();
-
             station.setName(item.getName());
-            station.setAddress(item.getAddress());
-            stationRepository.save(station);
-            SUCCESS.setData(station);
 
+            AddressDto addressDto = new AddressDto(item.getHomeNumber(), item.getStreetName(), item.getRegionId());
+            AddressEntity addressEntity = modelMapper.map(addressDto, AddressEntity.class);
+            AddressEntity save = addressRepository.save(addressEntity);
+            station.setName(item.getName());
+            station.setAddress(save);
+
+            stationRepository.editStation(id, save, item.getName());
+            SUCCESS.setData(station);
             return SUCCESS;
         }
         return NOT_FOUND;
     }
 
     @Override
-    public ApiResponse add(StationDto item) {
-//        StationEntity station=new StationEntity();
-//
-//        station.setName(item.getName());
-//        station.setAddress(item.getAddress());
-        StationEntity station = modelMapper.map(item, StationEntity.class);
+    public ApiResponse add(StationReceiveDto item) {
+
+        StationEntity station = new StationEntity();
+
+        AddressDto addressDto = new AddressDto(item.getHomeNumber(), item.getStreetName(), item.getRegionId());
+        AddressEntity addressEntity = modelMapper.map(addressDto, AddressEntity.class);
+        AddressEntity save = addressRepository.save(addressEntity);
+        station.setName(item.getName());
+        station.setAddress(save);
+
         SUCCESS.setData(stationRepository.save(station));
         return SUCCESS;
     }

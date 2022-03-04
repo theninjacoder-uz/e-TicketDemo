@@ -26,4 +26,10 @@ public class UserController {
     public ResponseEntity<?> adminLogin(@RequestBody UserDto userDto){
         return ResponseEntity.ok(userService.adminLogin(userDto));
     }
+
+    @GetMapping("{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable("username") String phoneNumber){
+        return ResponseEntity.ok(userService.getUserByPhoneNumber(phoneNumber));
+    }
+
 }

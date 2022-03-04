@@ -1,6 +1,8 @@
 package uz.pdp.eticketdemo.model.entity.address;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.thymeleaf.standard.processor.StandardLangXmlLangTagProcessor;
 import uz.pdp.eticketdemo.model.entity.address.CountryEntity;
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 
@@ -16,8 +18,11 @@ public class RegionEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String region;
 
-//    @ManyToOne(fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL
-//    )
-//    private CountryEntity country;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
+//    private Set<AddressEntity> address;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id")
+    private CountryEntity country;
 }

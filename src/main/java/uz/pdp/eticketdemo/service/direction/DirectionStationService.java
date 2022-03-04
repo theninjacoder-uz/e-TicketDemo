@@ -2,12 +2,11 @@ package uz.pdp.eticketdemo.service.direction;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import uz.pdp.eticketdemo.model.dto.direction.DirectionBetweenStationsDto;
 import uz.pdp.eticketdemo.model.dto.direction.DirectionStationDto;
+import uz.pdp.eticketdemo.model.entity.direction.DirectionEntity;
 import uz.pdp.eticketdemo.model.entity.direction.DirectionStationEntity;
 import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 import uz.pdp.eticketdemo.repository.direction.DirectionStationRepository;
@@ -16,9 +15,7 @@ import uz.pdp.eticketdemo.response.BaseResponse;
 import uz.pdp.eticketdemo.service.base.BaseService;
 import uz.pdp.eticketdemo.service.station.StationService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -122,4 +119,26 @@ public class DirectionStationService extends BaseResponse implements BaseService
         return directionStations;
     }
 
+//    public ApiResponse getDirectionWithNames(){
+//        List<DirectionStationEntity> allDirections =
+//                directionStationRepository.findAll();
+//        List<DirectionEntity> directionEntityList = new ArrayList<>();
+//
+//        Set<Long> cnt = new HashSet<>();
+//
+//        for (DirectionStationEntity directionStation : allDirections) {
+//            long directionId = directionStation.getDirectionId();
+//            if(!cnt.contains(directionId)) {
+//                directionEntityList.add((DirectionEntity) directionService.getById(directionId).getData());
+//                cnt.add(directionId);
+//            }
+//        }
+//        SUCCESS.setData(directionEntityList);
+//        return SUCCESS;
+//    }
+
+    public  List<DirectionStationEntity> getDirectionStationList(Long directionId){
+        return directionStationRepository
+                .getDirectionStationEntitiesByDirectionIdOrderByStationOrder(directionId);
+    }
 }

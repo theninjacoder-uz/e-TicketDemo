@@ -44,7 +44,7 @@ public class UserService implements BaseService<UserDto> {
         Optional<UserEntity> findUserById = userRepository.findById(id);
         if(findUserById.isPresent()){
             UserEntity userEntity = findUserById.get();
-            userEntity.setUserStatus(false);
+//            userEntity.setUserStatus(false);
             userRepository.save(userEntity);
             return SUCCESS;
         }
@@ -75,6 +75,11 @@ public class UserService implements BaseService<UserDto> {
         return userRepository
                 .existsAdminByPhoneNumberAndPassword(userDto.getPhoneNumber(), userDto.getPassword());
     }
+    // TODO: 2/17/2022 Check user before adding him
 
-    // TODO: 2/17/2022 Check user before adding him  
+        public UserEntity getUserByPhoneNumber(String phoneNumber){
+        Optional<UserEntity> userOptional = userRepository.findByPhoneNumber(phoneNumber);
+        return userOptional.orElseGet(UserEntity::new);
+    }
+
 }

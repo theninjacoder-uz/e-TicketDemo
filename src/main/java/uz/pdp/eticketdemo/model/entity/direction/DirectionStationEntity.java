@@ -13,10 +13,7 @@ import javax.persistence.*;
 public class DirectionStationEntity extends BaseEntity {
 
     private long stationId;
-
     private long directionId;
-
     private Integer stationOrder;
-
     private Double distanceWithNextStation;
 }

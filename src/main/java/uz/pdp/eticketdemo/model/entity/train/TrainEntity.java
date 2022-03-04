@@ -1,5 +1,6 @@
 package uz.pdp.eticketdemo.model.entity.train;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +22,7 @@ public class TrainEntity extends BaseEntity {
 
     private String model;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "train")
-    @JoinTable(name = "train_id")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "train")
     private List<WagonEntity> wagon;
 
     private Integer capacity;

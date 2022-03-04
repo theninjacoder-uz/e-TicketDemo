@@ -33,6 +33,7 @@ public class TrainService extends BaseResponse implements BaseService<TrainDto> 
         Optional<TrainEntity> byId = trainRepository.findById(id);
         if(byId.isPresent()){
             SUCCESS.setData(byId.get());
+            System.out.println(SUCCESS);
             return SUCCESS;
         }
         return NOT_FOUND;

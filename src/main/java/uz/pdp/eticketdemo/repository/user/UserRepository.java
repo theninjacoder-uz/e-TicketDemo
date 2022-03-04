@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import uz.pdp.eticketdemo.model.entity.user.UserEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
@@ -29,6 +30,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query(value = "select (count(u) > 0) from users u where u.phone_number = ?1 and u.password = ?2 and u.user_role & 12 > 0", nativeQuery = true)
     boolean existsAdminByPhoneNumberAndPassword(String phoneNumber, String password);
 
+    @Query("select u from UserEntity u where u.phoneNumber = ?1")
+    Optional<UserEntity> findByPhoneNumber(String phoneNumber);
 
 
 }

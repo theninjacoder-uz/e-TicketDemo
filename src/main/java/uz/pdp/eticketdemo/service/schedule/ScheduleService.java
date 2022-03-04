@@ -22,7 +22,6 @@ import uz.pdp.eticketdemo.service.station.StationService;
 import uz.pdp.eticketdemo.service.train.TrainService;
 
 import javax.persistence.EntityManager;
-import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -32,14 +31,10 @@ import java.util.*;
 public class ScheduleService implements BaseService<ScheduleDto> {
 
     public final ScheduleRepository scheduleRepository;
-    //    public final ScheduleSeatRepository scheduleSeatRepository;
-    private final DirectionStationRepository directionStationRepository;
     private final DirectionStationService directionStationService;
     private final TrainService trainService;
     private final BookingService bookingService;
-    private final StationService stationService;
-    private final ModelMapper modelMapper;
-    private final EntityManager entityManager;
+
 
 
     @Override
@@ -77,8 +72,7 @@ public class ScheduleService implements BaseService<ScheduleDto> {
                 .parse(scheduleDto.getStartDateTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
 
-        List<DirectionStationEntity> directionStationList = directionStationRepository
-                .getDirectionStationEntitiesByDirectionIdOrderByStationOrder(scheduleDto.getDirectionId());
+        List<DirectionStationEntity> directionStationList = directionStationService.getDirectionStationList(scheduleDto.getDirectionId());
 
         Optional<TrainEntity> optionalTrainEntityById = trainService
                 .getOptionalTrainEntityById(scheduleDto.getTrainId());

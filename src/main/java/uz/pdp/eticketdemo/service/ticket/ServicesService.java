@@ -2,9 +2,7 @@ package uz.pdp.eticketdemo.service.ticket;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.eticketdemo.model.dto.station.StationDto;
 import uz.pdp.eticketdemo.model.dto.ticket.ServicesDto;
-import uz.pdp.eticketdemo.model.entity.station.StationEntity;
 import uz.pdp.eticketdemo.model.entity.ticket.ServicesEntity;
 import uz.pdp.eticketdemo.repository.ticket.ServicesRepository;
 import uz.pdp.eticketdemo.response.ApiResponse;

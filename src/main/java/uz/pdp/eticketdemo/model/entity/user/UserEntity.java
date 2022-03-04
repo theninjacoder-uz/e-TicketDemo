@@ -1,24 +1,26 @@
 package uz.pdp.eticketdemo.model.entity.user;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import uz.pdp.eticketdemo.model.entity.base.BaseEntity;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+
+@RequiredArgsConstructor
 @Getter
 @Setter
-@RequiredArgsConstructor
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
 
     @Column(nullable = false)
-    private  String firstName;
+    private String firstName;
+    private String lastName;
 
-    private  String lastName;
-
-    @Column
     private String chatId;
 
     @Column(unique = true)
@@ -30,11 +32,12 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column(columnDefinition = "boolean default true")
-    private Boolean userStatus;
+//    @Column(columnDefinition = "boolean default true")
+//    private Boolean userStatus;
 
-    private int user_role;
+    private Integer user_role;
 
-//    @ManyToMany
-//    private List<RoleEntity> role;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    private List<RoleEntity> roleList;
+
 }

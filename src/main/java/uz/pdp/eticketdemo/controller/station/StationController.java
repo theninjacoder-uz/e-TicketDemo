@@ -1,8 +1,10 @@
 package uz.pdp.eticketdemo.controller.station;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.eticketdemo.model.dto.station.StationDto;
+import uz.pdp.eticketdemo.model.dto.station.StationReceiveDto;
 import uz.pdp.eticketdemo.response.ApiResponse;
 import uz.pdp.eticketdemo.service.station.StationService;
 
@@ -12,7 +14,7 @@ import uz.pdp.eticketdemo.service.station.StationService;
 public class StationController {
     private final StationService service;
     @PostMapping("/add")
-    public ApiResponse add(@RequestBody StationDto stationDto){
+    public ApiResponse add(@RequestBody StationReceiveDto stationDto){
         return service.add(stationDto);
     }
 
@@ -27,7 +29,12 @@ public class StationController {
     }
 
     @PostMapping("/edit")
-    public ApiResponse edit(@RequestParam(name = "id") Long id, @RequestBody StationDto stationDto){
+    public ApiResponse edit(@RequestParam(name = "id") Long id, @RequestBody StationReceiveDto stationDto){
         return service.edit(id, stationDto);
+    }
+
+    @GetMapping("/delete")
+    public ResponseEntity<?> delete(@RequestParam(name = "id") Long id){
+        return ResponseEntity.ok(service.delete(id));
     }
 }
