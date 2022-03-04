@@ -8,7 +8,6 @@ import uz.pdp.eticketdemo.model.entity.wagon.WagonType;
 @Getter
 @Setter
 public class WagonDto {
-
     private int number;
 
     private Integer capacity;
